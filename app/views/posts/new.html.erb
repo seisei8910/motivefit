@@ -1,2 +1,12 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1>投稿フォーム</h1>
+<%= form_with model: @post do |f| %>
+  <h4>フィットネスを行なった日</h4>
+  <%= f.date_field :fitness_date %>
+  <h4>メニュー</h4>
+  <%= f.text_area :menu %>
+  <h4>感想・メモ</h4>
+  <%= f.text_area :body %>
+  <h4>画像</h4>
+  <%= f.file_field :image, accept: "image/*" %>
+  <%= f.submit '投稿' %>
+<% end %>
