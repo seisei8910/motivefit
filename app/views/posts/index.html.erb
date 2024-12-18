@@ -1,7 +1,9 @@
 <% @posts.each do |post| %>
   <div>
     <p>フィットネスを行なった日：<%= post.fitness_date %></p>
-    <p>メニュー：<%= post.menu %></p>
+    <%= link_to post_path(post.id) do %>
+      <p>メニュー：<%= post.menu %></p>
+    <% end %>
     <p>感想・メモ：<%= post.body %></p>
     <%= image_tag post.get_image %>
     <p>ユーザーネーム：<%= post.user.name %><%= image_tag 'youngman_25.jpg' %></p>
