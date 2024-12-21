@@ -5,7 +5,7 @@
       <p>メニュー：<%= post.menu %></p>
     <% end %>
     <p>感想・メモ：<%= post.body %></p>
-    <%= image_tag post.get_image %>
+    <%= image_tag post.get_image(200,200) %>
     <p>ユーザーネーム：<%= post.user.name %><%= image_tag 'youngman_25.jpg' %></p>
   </div>
 <% end %>

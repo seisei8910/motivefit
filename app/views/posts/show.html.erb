@@ -2,7 +2,7 @@
     <p>フィットネスを行なった日：<%= @post.fitness_date %></p>
     <p>メニュー：<%= @post.menu %></p>
     <p>感想・メモ：<%= @post.body %></p>
-    <%= image_tag @post.get_image %>
+    <%= image_tag @post.get_image(200,200) %>
     <p>ユーザーネーム：<%= @post.user.name %><%= image_tag 'youngman_25.jpg' %></p>
     <p>投稿日：<%= @post.created_at.strftime('%Y-%m-%d') %></p>
     <% if @post.user == current_user %>
