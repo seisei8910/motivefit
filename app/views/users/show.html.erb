@@ -1,0 +1,15 @@
+<div>
+  <h3><%= @user.name %></h3>
+  <%= image_tag @user.get_profile_image(100,100) %>
+</div>
+
+<% @posts.each do |post| %>
+<div>
+  <p>フィットネスを行なった日：<%= post.fitness_date %></p>
+  <%= link_to post_path(post.id) do %>
+    <p>メニュー：<%= post.menu %></p>
+  <% end %>
+  <p>感想・メモ：<%= post.body %></p>
+  <%= image_tag post.get_image(200,200) %>
+</div>
+<% end %>
