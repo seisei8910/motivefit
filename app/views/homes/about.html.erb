@@ -1,1 +1,34 @@
-<h1>about画面</h1>
+<main>
+  <p id="notice"></p>
+  <div class="container">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+      <h1>
+        <strong>モチベフィット</strong> できること
+      </h1>
+      <p><strong>モチベフィット</strong>は、フィットネス愛好者や初心者が気軽に利用できるSNSです。</p>
+      <p>以下の機能で、あなたのフィットネスライフをサポートします。</p>
+      <ul>
+        <li>トレーニングログ投稿： 今日のトレーニングをシェアしてモチベーションをキープ！</li>
+        <li>いいね＆コメント： 仲間の投稿に励ましやアドバイスを送れる！</li>
+        <li>フォロー機能： 共感できる仲間をフォローして、継続の力に！</li>
+        <li>投稿履歴の確認： 過去の投稿を振り返って自分の取り組みを見直せる！</li>
+        <li>通知機能： フォローしている人の投稿や、自分の投稿へのいいね、フォローされた通知が届き、つながりを感じられる！</li>
+      </ul>
+      <p><strong>モチベフィット</strong>で、楽しく、無理なくフィットネスを続けましょう。</p>
+    </div>
+    <div class="btn-wrapper col-10 mx-auto">
+      <% if user_signed_in? %>
+        <div class="row">
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-sm btn-block log_out" %>
+        </div>
+      <% else %>
+        <div class="row">
+          <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+        </div>
+        <div class="row">
+          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>
