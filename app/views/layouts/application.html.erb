@@ -6,15 +6,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/bd90a16fee.js" crossorigin="anonymous"></script>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-          <a class="navbar-brand" href="/"><span>Bookers</span></a>
+          <a class="navbar-brand" href="/"><%= image_tag('motivefit_logo2.png') %></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,50 +24,50 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
                 <li>
-                  <%= link_to posts_path, class: "nav-link text-light mx-1" do %>
+                  <%= link_to posts_path, class: "nav-link text-dark mx-1" do %>
                     <i class="fas fa-home"></i>
                     Posts list
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to mypage_path, class: "nav-link text-light mx-1" do %>
+                  <%= link_to mypage_path, class: "nav-link text-dark mx-1" do %>
                     <i class="fas fa-home"></i>
                     My page
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to new_post_path, class: "nav-link text-light mx-1" do %>
+                  <%= link_to new_post_path, class: "nav-link text-dark mx-1" do %>
                     <i class="fa-solid fa-users"></i>
                     New post
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-light ml-1" do %>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "nav-link text-dark ml-1" do %>
                     <i class="fa-solid fa-sign-out-alt"></i>
                     Log out
                   <% end %>
                 </li>
               <% else %>
                 <li>
-                  <%= link_to "/", class: "nav-link text-light mx-1" do %>
+                  <%= link_to "/", class: "nav-link text-dark mx-1" do %>
                     <i class="fas fa-home"></i>
                     Home
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to about_path, class: "nav-link text-light mx-1" do %>
+                  <%= link_to about_path, class: "nav-link text-dark mx-1" do %>
                     <i class="fa-solid fa-link"></i>
                     About
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to new_user_registration_path, class: "nav-link text-light mx-1" do %>
+                  <%= link_to new_user_registration_path, class: "nav-link text-dark mx-1" do %>
                     <i class="fa-solid fa-user-plus"></i>
                     Sign up
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to new_user_session_path, class: "nav-link text-light ml-1" do %>
+                  <%= link_to new_user_session_path, class: "nav-link text-dark ml-1" do %>
                     <i class="fa-solid fa-sign-in-alt"></i>
                     Log in
                   <% end %>
