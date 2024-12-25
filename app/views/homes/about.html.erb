@@ -1,5 +1,4 @@
 <main>
-  <p id="notice"></p>
   <div class="container">
     <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
       <h1>
@@ -15,20 +14,6 @@
         <li>通知機能： フォローしている人の投稿や、自分の投稿へのいいね、フォローされた通知が届き、つながりを感じられる！</li>
       </ul>
       <p><strong>モチベフィット</strong>で、楽しく、無理なくフィットネスを続けましょう。</p>
-    </div>
-    <div class="btn-wrapper col-10 mx-auto">
-      <% if user_signed_in? %>
-        <div class="row">
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-sm btn-block log_out" %>
-        </div>
-      <% else %>
-        <div class="row">
-          <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
-        </div>
-        <div class="row">
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
-        </div>
-      <% end %>
     </div>
   </div>
 </main>
