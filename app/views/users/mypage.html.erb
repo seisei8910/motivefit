@@ -1,18 +1,44 @@
-<div>
-  <%= link_to user_path(@user.id) do %>
-    <h3><%= @user.name %></h3>
+<main>
+  <div class="container">
+  <div class="card overflow-hidden">
+    <div class="card-body p-0">
+      <%= image_tag "bg-1.jpg", class:"img-fluid"%>
+      <div class="row align-items-center">
+        <div class="col-lg-4 order-lg-1 order-2"></div>
+        <div class="col-lg-4 mt-n3 order-lg-2 order-1">
+          <div class="mt-n5">
+            <div class="d-flex align-items-center justify-content-center mb-2">
+              <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle"
+              style="width: 110px; height: 110px;">
+                <div class="border border-4 border-white d-flex align-items-center justify-content-center
+                rounded-circle overflow-hidden", style="width: 100px; height: 100px;">
+                  <%= image_tag @user.get_profile_image(100,100), alt: "User Profile Image" %>
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <h5 class="fs-5 mb-0 fw-semibold"><%= @user.name %></h5>
+              <p class="mb-0 fs-4"><%= @user.status_message %></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 order-last"></div>
+      </div>
+      <ul class="nav nav-pills user-profile-tab justify-content-end mt-2 bg-light-info rounded-2"
+      id="pills-tab" role="tablist" ></ul>
+    </div>
+  </div>
+  <div class="tab-content" id="pills-tabContent"></div>
+  </div>
+  
+  <% @posts.each do |post| %>
+  <div>
+    <p>フィットネスを行なった日：<%= post.fitness_date %></p>
+    <%= link_to post_path(post.id) do %>
+      <p>メニュー：<%= post.menu %></p>
+    <% end %>
+    <p>感想・メモ：<%= post.body %></p>
+    <%= image_tag post.get_image(200,200) %>
+  </div>
   <% end %>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <p><%= @user.status_message %></p>
-</div>
-
-<% @posts.each do |post| %>
-<div>
-  <p>フィットネスを行なった日：<%= post.fitness_date %></p>
-  <%= link_to post_path(post.id) do %>
-    <p>メニュー：<%= post.menu %></p>
-  <% end %>
-  <p>感想・メモ：<%= post.body %></p>
-  <%= image_tag post.get_image(200,200) %>
-</div>
-<% end %>
+</main>

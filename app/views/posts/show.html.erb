@@ -3,7 +3,7 @@
     <p>メニュー：<%= @post.menu %></p>
     <p>感想・メモ：<%= @post.body %></p>
     <%= image_tag @post.get_image(200,200) %>
-    <p>ユーザーネーム：<%= @post.user.name %><%= image_tag post_image.user.get_profile_image(100,100) %></p>
+    <p>ユーザーネーム：<%= @post.user.name %><%= image_tag @post.user.get_profile_image(100,100) %></p>
     <p>投稿日：<%= @post.created_at.strftime('%Y-%m-%d') %></p>
     <% if @post.user == current_user %>
       <%= link_to "編集", edit_post_path(@post.id) %>
