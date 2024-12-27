@@ -41,28 +41,23 @@
           </div>
           <div class="col-lg-8">
             <div class="card">
-              <div class="card-body border-bottom">
-                <div class="d-flex align-items-center gap-3">
-                  <%= image_tag @user.get_profile_image(40,40), class:"rounded-circle" %>
-                  <h6 class="fw-semibold mb-0 fs-4"><%= @user.name %></h6>
-                  
+              <% @posts.each do |post| %>
+                <div class="card-body border-bottom">
+                  <div class="d-flex align-items-center gap-3">
+                    <%= image_tag @user.get_profile_image(40,40), class:"rounded-circle" %>
+                    <h6 class="fw-semibold mb-0 fs-4"><%= @user.name %></h6>
+                    <span class="fs-2"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前</span>
+                  </div>
+                  <p class="text-dark my-3">フィットネスを行なった日：<%= post.fitness_date %></p>
+                  <p class="text-dark my-3">メニュー：<%= post.menu %></p>
+                  <p class="text-dark my-3">感想・メモ：<%= post.body %></p>
+                  <%= image_tag post.get_image(380,380), class:"img-fluid rounded-4 object-fit-cover d-block mx-auto" %>
                 </div>
-              </div>
+              <% end %>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <% @posts.each do |post| %>
-  <div>
-    <p>フィットネスを行なった日：<%= post.fitness_date %></p>
-    <%= link_to post_path(post.id) do %>
-      <p>メニュー：<%= post.menu %></p>
-    <% end %>
-    <p>感想・メモ：<%= post.body %></p>
-    <%= image_tag post.get_image(200,200) %>
-  </div>
-  <% end %>
 </main>
