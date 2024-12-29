@@ -19,28 +19,32 @@
   margin: auto;
 }
 
-.main-color {
+.text-emerald {
   color: #2ecc71 !important;
 }
 
-.bg-main-color {
+.bg-emerald {
   background-color: #2ecc71 !important;
 }
 
-.btn-main-color {
+.btn-emerald {
   color: #fff;
   background-color: #2ecc71;
   border-color: #2ecc71;
 }
 
-.btn-main-color:hover {
+.btn-emerald:hover {
   background-color: #27ae60;
   transform: scale(1.05);
 }
 
-.btn-main-color:active {
+.btn-emerald:active {
   background-color: #1e8449;
   transform: scale(0.95);
+}
+
+.border-emerald {
+  border-color: #2ecc71 !important;
 }
 
 .bg-light-gray {

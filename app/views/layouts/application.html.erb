@@ -26,19 +26,19 @@
               <% if user_signed_in? %>
                 <li>
                   <%= link_to posts_path, class: "nav-link text-dark mx-1" do %>
-                    <i class="fas fa-home"></i>
+                    <i class="fa-solid fa-list"></i>
                     Posts list
                   <% end %>
                 </li>
                 <li>
                   <%= link_to mypage_path, class: "nav-link text-dark mx-1" do %>
-                    <i class="fas fa-home"></i>
+                    <i class="fa-regular fa-user"></i>
                     My page
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to new_post_path, class: "nav-link main-color mx-1" do %>
-                    <i class="fa-solid fa-users"></i>
+                  <%= link_to new_post_path, class: "nav-link text-emerald mx-1" do %>
+                    <i class="fa-regular fa-pen-to-square"></i>
                     New post
                   <% end %>
                 </li>
@@ -85,11 +85,11 @@
     <footer class="bg-light text-dark pt-5 pb-4">
       <div class="container">
         <div class="row no-gutters">
-          <div class="col-md-4">
-            <p>善良な市民同士で無差別に食欲を煽るSNS</p>
+          <div class="col-md-5">
+            <p>仲間同士でお互いのやる気を引き出すSNS</p>
             <%= image_tag"motive-fit-logo.png", size: "200x50" %>
           </div>
-          <div class="col-md-8">
+          <div class="col-md-7">
             <h6 class="text-dark mt-2 mb-3">Link</h6>
             <ul class="p-0 list-unstyled">
               <li>

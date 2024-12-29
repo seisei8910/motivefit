@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row g-0 justify-content-center">
     <div class="col-md-6 col-sm-10 shadow-lg rounded px-0 my-5 bg-white">
-      <h5 class="text-white bg-main-color p-4 mb-0 rounded-top">投稿フォーム</h5>
+      <h5 class="text-white bg-emerald p-4 mb-0 rounded-top">投稿フォーム</h5>
       <div class="form-body p-4">
         <%= form_with model: @post, class: "mt-3" do |f| %>
           <div class="form-group">
@@ -21,7 +21,7 @@
             <%= f.file_field :image, accept: "image/*", class: "form-control border-emerald" %>
           </div>
           <hr>
-          <%= f.submit '投稿', class: "btn btn-lg btn-block btn-main-color text-white mt-4" %>
+          <%= f.submit '投稿', class: "btn btn-lg btn-block btn-emerald text-white mt-4" %>
         <% end %>
       </div>
     </div>

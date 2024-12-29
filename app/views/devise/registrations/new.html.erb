@@ -1,21 +1,28 @@
-<main class="text-center">
-  <div class="h-100 d-flex align-items-center justify-content-center">
+<div class="container h-100 d-flex align-items-center justify-content-center">
+  <div class="col-md-6 col-sm-10 shadow-lg rounded p-4 bg-white">
+    <h2 class="text-center text-emerald font-weight-bold mb-4">モチベフィットへようこそ！</h2>
+    <p class="text-center text-muted mb-4">アカウントを作成して、<br>仲間と一緒にフィットネスを楽しみましょう。</p>
     <%= form_with model: @user, class:"form-signup", url: user_registration_path do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
-      <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
-      <%= f.label :name, class:"sr-only" %>
-      <%= f.text_field :name, class:"form-control", placeholder: "名前" %>
-      <%= f.label :email, class:"sr-only" %>
-      <%= f.email_field :email, class:"form-control", placeholder: "メールアドレス",
-      autofocus: true, autocomplete: "email" %>
-      <%= f.label :password, class:"sr-only" %>
-      <%= f.password_field :password, autocomplete: "new-password", class:"form-control",
-      placeholder: (@minimum_password_length ? "パスワード (最低#{@minimum_password_length}文字)" : "パスワード") %>
-      <%= f.label :password_confirmation, class:"sr-only" %>
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control",
-      placeholder:"パスワードの確認" %>
-      <%= f.submit "Sign up", class:"btn btn-lg btn-success btn-block mt-3" %>
-      <%= render "devise/shared/links" %>
+      <div class="form-group">
+        <%= f.text_field :name, class:"form-control border-emerald", placeholder: "名前" %>
+      </div>
+      <div class="form-group">
+        <%= f.email_field :email, class:"form-control border-emerald", placeholder: "メールアドレス",
+        autofocus: true, autocomplete: "email" %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password, autocomplete: "new-password", class:"form-control border-emerald",
+        placeholder: (@minimum_password_length ? "パスワード (最低#{@minimum_password_length}文字)" : "パスワード") %>
+      </div>
+      <div class="form-group">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control border-emerald",
+        placeholder:"パスワードの確認" %>
+      </div>
+      <%= f.submit "サインアップ", class:"btn btn-lg btn-emerald btn-block text-white mt-4" %>
+      <div class="text-center mt-3">
+        <%= render "devise/shared/links" %>
+      </div>
     <% end %>
   </div>
-</main>
+</div>
