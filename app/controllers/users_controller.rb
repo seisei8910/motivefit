@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   def mypage
     @user = User.find(current_user.id)
-    @posts = @user.posts
+    @post = Post.new
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def edit

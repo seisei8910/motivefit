@@ -1,65 +1,72 @@
-<main>
-  <div class="container">
-    <div class="card overflow-hidden">
-      <div class="card-body p-0">
-        <%= image_tag "bg-1.jpg", class:"img-fluid"%>
-        <div class="row align-items-center">
-          <div class="col-lg-4 order-lg-1 order-2"></div>
-          <div class="col-lg-4 mt-n3 order-lg-2 order-1">
-            <div class="mt-n5">
-              <div class="d-flex align-items-center justify-content-center mb-2">
-                <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle"
-                style="width: 110px; height: 110px;">
-                  <div class="border border-4 border-white d-flex align-items-center justify-content-center
-                  rounded-circle overflow-hidden", style="width: 100px; height: 100px;">
-                    <%= image_tag @user.get_profile_image(100,100), alt: "User Profile Image" %>
-                  </div>
-                </div>
-              </div>
-              <div class="text-center">
-                <h5 class="fs-5 mb-0 fw-semibold"><%= @user.name %></h5>
-              </div>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-4">
+      <h2 class="font-weight-bold mb-0">ユーザー情報</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>名前</th>
+            <th><%= @user.name%></th>
+          </tr>
+          <tr>
+            <th>ひとこと</th>
+            <th><%= @user.status_message %></th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="row">
+        <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+          <i class="fas fa-user-cog"></i>プロフィール編集
+        <% end %>
+      </div>
+      <div class="shadow-lg rounded px-0 my-5 bg-white">
+        <h5 class="text-white bg-emerald p-4 mb-0 rounded-top">投稿フォーム</h5>
+        <div class="form-body p-4">
+          <%= form_with model: @post, class: "mt-3" do |f| %>
+            <div class="form-group">
+              <h6 class="text-dark">フィットネスを行なった日</h6>
+              <%= f.date_field :fitness_date, class: "form-control border-emerald" %>
             </div>
-          </div>
-          <div class="col-lg-4 order-last"></div>
+            <div class="form-group">
+              <h6 class="text-dark">メニュー</h6>
+              <%= f.text_area :menu, class: "form-control border-emerald", rows: 3, placeholder: "例：ランニング 5km、スクワット 3セット" %>
+            </div>
+            <div class="form-group">
+              <h6 class="text-dark">感想・メモ</h6>
+              <%= f.text_area :body, class: "form-control border-emerald", rows: 3, placeholder: "今日のフィットネスについて記録を残しましょう" %>
+            </div>
+            <div class="form-group">
+              <h6 class="text-dark">画像(任意)</h6>
+              <%= f.file_field :image, accept: "image/*", class: "form-control border-emerald" %>
+            </div>
+            <hr>
+            <%= f.submit '投稿', class: "btn btn-lg btn-block btn-emerald text-white mt-4" %>
+          <% end %>
         </div>
       </div>
     </div>
-    <div class="tab-content" id="pills-tabContent">
-      <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
-      tabindex="0">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="card shadow-none border">
-              <div class="card-body">
-                <h4 class="fw-semibold mb-3">
-                  ひとこと
-                </h4>
-                <p><%= @user.status_message %></p>
-              </div>
-            </div>
+    <div class="col-md-7 offset-md-1">
+      <h2 class="text-emerald font-weight-bold mb-4">投稿一覧</h2>
+      <div class="card-list-container">
+        <% @posts.each do |post| %>
+        <div class="card shadow-lg border-0 mb-4">
+          <div class="card-header d-flex align-items-center gap-3 text-white bg-emerald">
+            <%= image_tag post.user.get_profile_image(30,30), class:"rounded-circle" %>
+            <h6><%= post.user.name %></h6>
+            <p class="fs-6-50"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前</p>
           </div>
-          <div class="col-lg-8">
-            <div class="card">
-              <% @posts.each do |post| %>
-                <div class="card-body border-bottom">
-                  <div class="d-flex align-items-center gap-3">
-                    <%= image_tag @user.get_profile_image(40,40), class:"rounded-circle" %>
-                    <h6 class="fw-semibold mb-0 fs-4"><%= @user.name %></h6>
-                    <span class="fs-2"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前</span>
-                  </div>
-                  <p class="text-dark my-3">フィットネスを行なった日：<%= post.fitness_date %></p>
-                  <p class="text-dark my-3">メニュー：<%= post.menu %></p>
-                  <p class="text-dark my-3">感想・メモ：<%= post.body %></p>
-                  <% if post.image.attached? %>
-                    <%= image_tag post.get_image(380,380), class:"img-fluid rounded-4 object-fit-cover d-block mx-auto" %>
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
+          <div class="card-body">
+            <p class="card-text"><strong>日付:</strong> <%= post.fitness_date %></p>
+            <p class="card-text"><strong>メニュー:</strong> <%= post.menu %></p>
+            <p class="card-text"><strong>感想・メモ:</strong> <%= post.body %></p>
+            <% if post.image.attached? %>
+              <%= image_tag post.get_image(200,200), class:"img-fluid object-fit-cover rounded-4 mx-auto d-block shadow-sm" %>
+            <% end %>
           </div>
         </div>
+        <% end %>
       </div>
     </div>
   </div>
-</main>
+</div>

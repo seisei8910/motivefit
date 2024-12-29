@@ -1,23 +1,23 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-4">
-      <h2>User info</h2>
+      <h2 class="font-weight-bold mb-0">ユーザー情報</h2>
       <%= image_tag @user.get_profile_image(100,100) %>
       <table class="table">
         <tbody>
           <tr>
-            <th>name</th>
+            <th>名前</th>
             <th><%= @user.name%></th>
           </tr>
           <tr>
-            <th>introduction</th>
+            <th>ひとこと</th>
             <th><%= @user.status_message %></th>
           </tr>
         </tbody>
       </table>
       <div class="row">
         <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
-          <i class="fas fa-user-cog"></i>
+          <i class="fas fa-user-cog"></i>プロフィール編集
         <% end %>
       </div>
       <div class="shadow-lg rounded px-0 my-5 bg-white">
@@ -47,14 +47,22 @@
       </div>
     </div>
     <div class="col-md-7 offset-md-1">
-      <h2>Posts</h2>
+      <h2 class="text-emerald font-weight-bold mb-4">投稿一覧</h2>
       <div class="card-list-container">
         <% @posts.each do |post| %>
-        <div class="card w-100 mx-auto mt-4 shadow-lg">
-          <div class="card-header d-flex align-items-center gap-3">
+        <div class="card shadow-lg border-0 mb-4">
+          <div class="card-header d-flex align-items-center gap-3 text-white bg-emerald">
             <%= image_tag post.user.get_profile_image(30,30), class:"rounded-circle" %>
             <h6><%= post.user.name %></h6>
             <p class="fs-6-50"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前</p>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>日付:</strong> <%= post.fitness_date %></p>
+            <p class="card-text"><strong>メニュー:</strong> <%= post.menu %></p>
+            <p class="card-text"><strong>感想・メモ:</strong> <%= post.body %></p>
+            <% if post.image.attached? %>
+              <%= image_tag post.get_image(200,200), class:"img-fluid object-fit-cover rounded-4 mx-auto d-block shadow-sm" %>
+            <% end %>
           </div>
         </div>
         <% end %>
@@ -62,27 +70,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-<% @posts.each do |post| %>
-  <div>
-    <p>フィットネスを行なった日：<%= post.fitness_date %></p>
-    <%= link_to post_path(post.id) do %>
-      <p>メニュー：<%= post.menu %></p>
-    <% end %>
-    <p>感想・メモ：<%= post.body %></p>
-    <% if post.image.attached? %>
-      <%= image_tag post.get_image(200,200) %>
-    <% end %>
-    <p>ユーザーネーム：<%= post.user.name %><%= image_tag post.user.get_profile_image(100,100) %></p>
-  </div>
-<% end %>
