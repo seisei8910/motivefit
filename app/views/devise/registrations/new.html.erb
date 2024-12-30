@@ -1,9 +1,9 @@
+<%= render "devise/shared/error_messages", resource: resource %>
 <div class="container h-100 d-flex align-items-center justify-content-center">
   <div class="col-md-6 col-sm-10 shadow-lg rounded p-4 bg-white">
     <h2 class="text-center text-emerald font-weight-bold mb-4">モチベフィットへようこそ！</h2>
     <p class="text-center text-muted mb-4">アカウントを作成して、<br>仲間と一緒にフィットネスを楽しみましょう。</p>
     <%= form_with model: @user, class:"form-signup", url: user_registration_path do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
       <div class="form-group">
         <%= f.text_field :name, class:"form-control border-emerald", placeholder: "名前" %>
       </div>

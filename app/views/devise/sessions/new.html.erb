@@ -3,7 +3,6 @@
     <h1 class="text-center text-emerald font-weight-bold mb-4">ログイン</h1>
     <p class="text-center text-muted mb-4">アカウントにログインして、<br>フィットネス仲間とつながりましょう！</p>
     <%= form_with model: @user, class: "form-signin", url: user_session_path do |f| %>
-      <p class="flash-message alert"><%= alert %></p>
       <div class="form-group">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control border-emerald",
         placeholder: "メールアドレス" %>
