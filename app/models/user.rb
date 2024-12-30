@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+  validates :name, presence: true, length: { maximum: 50 }, format: { with: /\A[^\d`!@#$%\^&*+_=]+\z/, message: "に不正な文字が含まれています" }
+
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/icon_no-image.png')
