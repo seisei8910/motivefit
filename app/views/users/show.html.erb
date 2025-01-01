@@ -64,7 +64,7 @@
               </div>
               <%= link_to post_path(post.id) do %>
                 <div class="card-body">
-                  <p class="card-text text-dark"><strong>日付:</strong> <%= post.fitness_date %></p>
+                  <p class="card-text text-dark"><strong>日付:</strong> <%= post.fitness_date.strftime("%Y年%m月%d日") %></p>
                   <p class="card-text text-dark"><strong>メニュー:</strong> <%= post.menu %></p>
                   <p class="card-text text-dark"><strong>感想・メモ:</strong> <%= post.body %></p>
                   <% if post.image.attached? %>
