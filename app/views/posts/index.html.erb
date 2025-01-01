@@ -17,7 +17,7 @@
       </table>
       <div class="row">
         <% if @user == current_user %>
-          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-info btn-block" do %>
             <i class="fas fa-user-cog"></i>プロフィール編集
           <% end %>
         <% end %>
@@ -64,9 +64,9 @@
             </div>
             <%= link_to post_path(post.id) do %>
               <div class="card-body">
-                <p class="card-text text-dark"><strong>日付:</strong> <%= post.fitness_date.strftime("%Y年%m月%d日") %></p>
-                <p class="card-text text-dark"><strong>メニュー:</strong> <%= post.menu %></p>
-                <p class="card-text text-dark"><strong>感想・メモ:</strong> <%= post.body %></p>
+                <p class="card-text text-dark border-bottom"><strong>日付:</strong> <%= post.fitness_date.strftime("%Y年%m月%d日") %></p>
+                <p class="card-text text-dark border-bottom"><strong>メニュー:</strong> <%= post.menu %></p>
+                <p class="card-text text-dark border-bottom"><strong>感想・メモ:</strong> <%= post.body %></p>
                 <% if post.image.attached? %>
                   <%= image_tag post.get_image(200,200), class:"img-fluid object-fit-cover rounded-4 mx-auto d-block shadow-sm" %>
                 <% end %>
