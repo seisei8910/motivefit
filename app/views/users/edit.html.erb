@@ -1,6 +1,7 @@
 <% if @user.errors.any? %>
   <div class="errormessage">
-    <h2><%= @user.errors.count %>件のエラーが発生しました</h2>
+    プロフィールの更新に失敗しました。入力内容をご確認ください。
+    <h2><%= @user.errors.count %>件のエラーが発生しています</h2>
     <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>

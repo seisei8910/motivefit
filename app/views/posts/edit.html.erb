@@ -1,6 +1,7 @@
 <% if @post.errors.any? %>
   <div class="errormessage">
-    <h2><%= @post.errors.count %>件のエラーが発生しました</h2>
+    投稿の編集に失敗しました 😢 入力内容をご確認ください。
+    <h2><%= @post.errors.count %>件のエラーが発生しています</h2>
     <ul>
       <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
