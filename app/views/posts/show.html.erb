@@ -1,16 +1,16 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-sm-12 col-md-8 mx-auto">
-      <h2 class="text-emerald font-weight-bold mb-4">投稿詳細</h2>
+      <h2 class="font-weight-bold mb-4">投稿詳細</h2>
       <div class="card-list-container">
-        <div class="card shadow-lg border-0 mb-4">
-          <div class="card-header d-flex align-items-center gap-3 text-white bg-emerald">
+        <div class="card shadow-lg border border-emerald rounded-2 mb-4">
+          <div class="card-header d-flex align-items-center gap-3">
             <%= link_to image_tag(@post.user.get_profile_image(30,30), class:"rounded-circle"), user_path(@post.user.id) %>
             <%= link_to user_path(@post.user.id) do %>
-              <h6 class="text-white"><%= @post.user.name %></h6>
+              <h6 class="text-black"><%= @post.user.name %></h6>
             <% end %>
             <%= link_to post_path(@post.id) do %>
-              <p class="fs-6-50 text-white"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(@post.created_at) %>前</p>
+              <p class="fs-6-50 text-black"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(@post.created_at) %>前</p>
             <% end %>
             <% if @post.user == current_user %>
               <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-sm btn-info ms-auto" %>
