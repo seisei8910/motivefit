@@ -101,5 +101,16 @@ a:hover{
   background-color: #ffd4d1;
   color: #930403;
   border: solid 1px #930403;
-  margin-bottom: 1rem;
+  border-radius: 5px;
+  padding: 16px 24px;
+  margin: 16px 0px;
+}
+
+.errormessage {
+  background-color: #ffd4d1;
+  color: #930403;
+  border: solid 1px #930403;
+  border-radius: 5px;
+  padding: 16px 24px;
+  margin: 16px 0px;
 }

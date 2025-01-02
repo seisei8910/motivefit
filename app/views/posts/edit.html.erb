@@ -1,3 +1,13 @@
+<% if @post.errors.any? %>
+  <div class="errormessage">
+    <h2><%= @post.errors.count %>件のエラーが発生しました</h2>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 <div class="container">
   <div class="row g-0 justify-content-center">
     <div class="col-md-6 col-sm-10 shadow-lg rounded px-0 my-5 bg-white">
