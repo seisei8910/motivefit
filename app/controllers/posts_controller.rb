@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @post.user_id = current_user.id
     if @post.save
       flash[:notice] = "投稿完了！あなたの努力がみんなのモチベーションに繋がります 🌟"
-      redirect_to posts_path(@post.id)
+      redirect_to post_path(@post.id)
     else
       render :new
     end

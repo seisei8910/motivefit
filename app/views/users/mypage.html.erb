@@ -17,9 +17,6 @@
           <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-info btn-block" do %>
             <i class="fas fa-user-cog"></i>プロフィール編集
           <% end %>
-          <%= link_to user_path(current_user.id), class: "btn btn-outline-danger btn-block",method: :delete, "data-confirm" => "本当に退会しますか？" do %>
-            <i class="fa-solid fa-door-open"></i></i> 退会
-          <% end %>
         <% end %>
       </div>
       <div class="shadow-lg rounded px-0 my-5 bg-white">
