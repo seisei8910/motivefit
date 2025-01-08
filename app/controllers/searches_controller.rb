@@ -13,7 +13,7 @@ class SearchesController < ApplicationController
     if @model  == "user"
       @users = User.search_for(@word, @method)
     else
-      @books = Books.search_for(@word, @method)
+      @posts = Post.search_for(@word, @method)
     end
   end
 end

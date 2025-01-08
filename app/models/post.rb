@@ -8,13 +8,13 @@ class Post < ApplicationRecord
 
   def self.search_for(word, method)
     if method == 'perfect_match'
-      Post.where("menu or body": word)
+      Post.where("menu LIKE ? or body LIKE ? ", word, word)
     elsif method == 'forward_match'
-      Post.where('menu or body LIKE ?', word + '%')
+      Post.where('menu LIKE ? or body LIKE ?', word + '%', word + '%')
     elsif method == 'backward_match'
-      Post.where('menu or body LIKE ?', '%' + word)
+      Post.where('menu LIKE ? or body LIKE ?', '%' + word, '%' + word)
     else
-      Post.where('menu or body LIKE ?', '%' + word + '%')
+      Post.where('menu LIKE ? or body LIKE ?', '%' + word + '%', '%' + word + '%')
     end
   end
 
