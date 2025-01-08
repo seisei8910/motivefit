@@ -41,3 +41,9 @@ ja:
         body: 感想・メモ
         fitness_date: フィットネスを行なった日
         menu: メニュー
+  search:
+    method:
+      perfect_match: 完全一致
+      forward_match: 前方一致
+      backward_match: 後方一致
+      partial_match: 部分一致

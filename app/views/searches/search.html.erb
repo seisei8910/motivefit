@@ -49,7 +49,7 @@
       <% if @model == 'user' %>
       
       <% elsif @model == 'post' %>
-        <h2 class="font-weight-bold mb-4">投稿検索 <%= @method %> 結果一覧</h2>
+        <h2 class="font-weight-bold mb-4">投稿 <%= I18n.t("search.method.#{@method}", default: @method) %> 検索結果一覧</h2>
         <div class="card-list-container">
           <% @posts.each do |post| %>
             <div class="card shadow-lg border border-emerald rounded-2 mb-4">
