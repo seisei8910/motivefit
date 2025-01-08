@@ -8,9 +8,9 @@ class SearchesController < ApplicationController
 
     # 選択したモデルに応じて検索を実行
     if @model  == "user"
-      @records = User.search_for(@word, @method)
+      @users = User.search_for(@word, @method)
     else
-      @records = Books.search_for(@word, @method)
+      @books = Books.search_for(@word, @method)
     end
   end
 end
