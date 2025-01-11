@@ -22,21 +22,24 @@
             <% if @post.image.attached? %>
               <%= image_tag @post.get_image(300,300), class:"img-fluid object-fit-cover rounded-4 mx-auto d-block shadow-sm" %>
             <% end %>
-          </div>
-          <div class="card-body">
-            <p>コメント件数：<%= @post.post_comments.count %></p>
-            <% @post.post_comments.each do |post_comment| %>
-              <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-              <%= post_comment.user.name %>
-              <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-            <% end %>
+            <p class="card-text border-top border-bottom mt-3 p-2">コメント件数：<%= @post.post_comments.count %></p>
             <%= form_with model: [@post, @post_comment] do |f| %>
               <%= f.text_area :comment, class: "form-control", rows: '2', placeholder: "コメントをここに" %>
               <div class="d-flex">
-                <%= f.submit "送信", class: "btn btn-sm btn-secondary ms-auto my-2" %>
+                <%= f.submit "送信", class: "btn btn-sm btn-secondary ms-auto mt-2" %>
               </div>
             <% end %>
           </div>
+          <% @post.post_comments.each do |post_comment| %>
+            <div class="card-body border">
+              <p>
+                <%= image_tag post_comment.user.get_profile_image(30,30), class:"rounded-circle" %>
+                <%= post_comment.user.name %>
+                <i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post_comment.created_at) %>前
+              </p>
+              <%= post_comment.comment %>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
