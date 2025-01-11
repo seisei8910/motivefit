@@ -47,3 +47,6 @@ ja:
       forward_match: 前方一致
       backward_match: 後方一致
       partial_match: 部分一致
+    time:
+      am: 午前
+      pm: 午後

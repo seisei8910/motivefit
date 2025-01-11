@@ -9,22 +9,40 @@
             <%= link_to user_path(@post.user.id) do %>
               <h6 class="text-black"><%= @post.user.name %></h6>
             <% end %>
-            <%= link_to post_path(@post.id) do %>
-              <p class="fs-6-50 text-black"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(@post.created_at) %>前</p>
-            <% end %>
+            <p class="fs-6-50 text-black"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(@post.created_at) %>前</p>
             <% if @post.user == current_user %>
               <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-sm btn-info ms-auto" %>
               <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-sm btn-danger", "data-confirm" => "本当に消しますか?" %>
             <% end %>
           </div>
-          <%= link_to post_path(@post.id) do %>
-            <div class="card-body">
-              <p class="card-text text-dark border-bottom"><strong>日付:</strong> <%= @post.fitness_date.strftime("%Y年%m月%d日") %></p>
-              <p class="card-text text-dark border-bottom"><strong>メニュー:</strong> <%= @post.menu %></p>
-              <p class="card-text text-dark border-bottom"><strong>感想・メモ:</strong> <%= @post.body %></p>
-              <% if @post.image.attached? %>
-                <%= image_tag @post.get_image(200,200), class:"img-fluid object-fit-cover rounded-4 mx-auto d-block shadow-sm" %>
-              <% end %>
+          <div class="card-body">
+            <p class="card-text text-dark border-bottom"><strong>日付:</strong> <%= @post.fitness_date.strftime("%Y年%m月%d日") %></p>
+            <p class="card-text text-dark border-bottom"><strong>メニュー:</strong> <%= @post.menu %></p>
+            <p class="card-text text-dark border-bottom"><strong>感想・メモ:</strong> <%= @post.body %></p>
+            <% if @post.image.attached? %>
+              <%= image_tag @post.get_image(300,300), class:"img-fluid object-fit-cover rounded-4 mx-auto mb-3 d-block shadow-sm" %>
+            <% end %>
+            <%= @post.created_at.strftime('%P') == 'am' ? '午前' : '午後' %>
+            <%= @post.created_at.strftime('%l:%M・%Y年%m月%d日') %>
+            <p class="card-text border-top border-bottom mb-3 pt-3"><i class="fa-regular fa-comment"></i>コメント数 <%= @post.post_comments.count %></p>
+            <%= form_with model: [@post, @post_comment] do |f| %>
+              <%= f.text_area :comment, class: "form-control", rows: '2', placeholder: "コメントをここに" %>
+              <div class="d-flex">
+                <%= f.submit "送信", class: "btn btn-sm btn-secondary ms-auto mt-2" %>
+              </div>
+            <% end %>
+          </div>
+          <% @post.post_comments.each do |post_comment| %>
+            <div class="card-body border">
+              <div class="d-flex align-items-center gap-3">
+                <%= image_tag post_comment.user.get_profile_image(30,30), class:"rounded-circle" %>
+                <h6><%= post_comment.user.name %></h6>
+                <p class="fs-6-50"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post_comment.created_at) %>前</p>
+                <% if post_comment.user == current_user %>
+                  <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-sm btn-danger ms-auto", "data-confirm" => "本当に消しますか?" %>
+                <% end %>
+              </div>
+              <%= post_comment.comment %>
             </div>
           <% end %>
         </div>
