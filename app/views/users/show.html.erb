@@ -67,6 +67,7 @@
                   <% if post.image.attached? %>
                     <%= image_tag post.get_image(200,200), class:"img-fluid object-fit-cover rounded-4 mx-auto d-block shadow-sm" %>
                   <% end %>
+                  <p class="card-text text-dark border-bottom mt-3 p-2">コメント数：<%= @post.post_comments.count %></p>
                 </div>
               <% end %>
             </div>
