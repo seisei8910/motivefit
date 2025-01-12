@@ -8,20 +8,16 @@ Rails.application.routes.draw do
     resources :users, only: [:destroy]
   end
 
-  devise_for :users
-
-  root to: "homes#top"
-
-  get "/about", to: "homes#about"
-
-  resources :posts do
-    resources :post_comments, only: [:create, :destroy]
+  scope module: :public do
+    devise_for :users
+    root to: "homes#top"
+    get "/about", to: "homes#about"
+    resources :posts do
+      resources :post_comments, only: [:create, :destroy]
+    end
+    get "/mypage", to: "users#mypage"
+    resources :users, only: [:show, :edit, :update, :destroy]
+    get "/search", to: "searches#search"
   end
-
-  get "/mypage", to: "users#mypage"
-
-  resources :users, only: [:show, :edit, :update, :destroy]
-
-  get "/search", to: "searches#search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
