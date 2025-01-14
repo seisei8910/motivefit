@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-8">
-      <h4 class="bg-light w-25 my-2 p-1">ユーザー管理</h4>
+      <h4 class="bg-secondary-subtle w-25 my-2 p-1">ユーザー管理</h4>
       <table class="table">
-        <thead>
-          <tr class="table-secondary">
+        <thead  class="table-light border-top-color border-secondary">
+          <tr>
             <th scope="col">ユーザーID</th>
             <th scope="col">名前</th>
             <th scope="col">メールアドレス</th>
@@ -13,7 +13,7 @@
         </thead>
         <tbody>
           <% @users.each do |user| %>
-            <tr class="border-top border-bottom">
+            <tr>
               <th scope="row"><%= link_to user.id, admin_user_path(user.id), class: "text-dark" %></th>
               <td><%= link_to user.name, admin_user_path(user.id), class: "text-dark" %></td>
               <td><%= link_to user.email, admin_user_path(user.id), class: "text-dark" %></td>
