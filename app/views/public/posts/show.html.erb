@@ -32,7 +32,7 @@
               </div>
             <% end %>
           </div>
-          <% @post.post_comments.each do |post_comment| %>
+          <% @post.post_comments.order(created_at: :desc).each do |post_comment| %>
             <div class="card-body border">
               <div class="d-flex align-items-center gap-3">
                 <%= image_tag post_comment.user.get_profile_image(30,30), class:"rounded-circle" %>
