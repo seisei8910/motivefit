@@ -3,6 +3,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
   has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :fitness_date, presence: true
   validates :menu, presence: true
@@ -23,4 +24,9 @@ class Post < ApplicationRecord
     return nil unless image.attached?
     image.variant(resize_to_limit: [width, height]).processed
   end
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
+
 end
