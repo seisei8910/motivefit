@@ -55,6 +55,14 @@ a:hover{
   transform: scale(0.95);
 }
 
+.text-favorite {
+  color: #000;
+}
+
+.text-favorite:hover {
+  color: #dc3545;
+}
+
 .border-emerald {
   border-color: #2ecc71 !important;
 }
