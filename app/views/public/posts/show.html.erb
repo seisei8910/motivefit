@@ -26,19 +26,9 @@
             <%= @post.created_at.strftime('%l:%M・%Y年%m月%d日') %>
             <div class="d-flex align-items-center gap-3 border-top border-bottom mb-3 pt-3">
               <p class="card-text"><i class="fa-regular fa-comment"></i>コメント数 <%= @post.post_comments.count %></p>
-              <% if @post.favorited_by?(current_user) %>
-                <p>
-                  <%= link_to post_favorite_path(@post), method: :delete, class: "text-danger" do %>
-                    ♥<%= @post.favorites.count %> いいね
-                  <% end %>
-                </p>
-                <% else %>
-                <p>
-                  <%= link_to post_favorite_path(@post), method: :post, class: "text-favorite" do %>
-                    ♡<%= @post.favorites.count %> いいね
-                  <% end %>
-                </p>
-              <% end %>
+              <div id="favorite_buttons_<%= @post.id %>">
+                <%= render "public/favorites/favorite", post: @post %>
+              </div>
             </div>
             <%= form_with model: [@post, @post_comment] do |f| %>
               <%= f.text_area :comment, class: "form-control", rows: '2', placeholder: "コメントをここに" %>
