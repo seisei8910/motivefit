@@ -49,28 +49,33 @@
       <h2 class="font-weight-bold mb-4">投稿一覧</h2>
       <div class="card-list-container">
         <% @posts.each do |post| %>
-            <div class="card shadow-lg border border-emerald rounded-2 mb-4">
-              <div class="card-header d-flex align-items-center gap-3">
-                <%= link_to image_tag(post.user.get_profile_image(30,30), class:"rounded-circle"), user_path(post.user.id) %>
-                <%= link_to user_path(post.user.id) do %>
-                  <h6 class="text-dark"><%= post.user.name %></h6>
-                <% end %>
-                <%= link_to post_path(post.id) do %>
-                  <p class="fs-6-50 text-dark"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前</p>
-                <% end %>
-              </div>
+          <div class="card shadow-lg border border-emerald rounded-2 mb-4">
+            <div class="card-header d-flex align-items-center gap-3">
+              <%= link_to image_tag(post.user.get_profile_image(30,30), class:"rounded-circle"), user_path(post.user.id) %>
+              <%= link_to user_path(post.user.id) do %>
+                <h6 class="text-dark"><%= post.user.name %></h6>
+              <% end %>
               <%= link_to post_path(post.id) do %>
-                <div class="card-body">
-                  <p class="card-text text-dark border-bottom"><strong>日付:</strong> <%= post.fitness_date.strftime("%Y年%m月%d日") %></p>
-                  <p class="card-text text-dark border-bottom"><strong>メニュー:</strong> <%= post.menu %></p>
-                  <p class="card-text text-dark border-bottom"><strong>感想・メモ:</strong> <%= post.body %></p>
-                  <% if post.image.attached? %>
-                    <%= image_tag post.get_image(200,200), class:"img-fluid object-fit-cover rounded-4 mx-auto mb-3 d-block shadow-sm" %>
-                  <% end %>
-                  <p class="card-text text-dark border-bottom mb-1"><i class="fa-regular fa-comment"></i>コメント数 <%= post.post_comments.count %></p>
-                </div>
+                <p class="fs-6-50 text-dark"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前</p>
               <% end %>
             </div>
+            <%= link_to post_path(post.id) do %>
+              <div class="card-body">
+                <p class="card-text text-dark border-bottom"><strong>日付:</strong> <%= post.fitness_date.strftime("%Y年%m月%d日") %></p>
+                <p class="card-text text-dark border-bottom"><strong>メニュー:</strong> <%= post.menu %></p>
+                <p class="card-text text-dark border-bottom"><strong>感想・メモ:</strong> <%= post.body %></p>
+                <% if post.image.attached? %>
+                  <%= image_tag post.get_image(200,200), class:"img-fluid object-fit-cover rounded-4 mx-auto d-block shadow-sm" %>
+                <% end %>
+                <div class="d-flex align-items-center gap-3 border-bottom pt-3">
+                  <p class="card-text text-dark"><i class="fa-regular fa-comment"></i>コメント数 <%= post.post_comments.count %></p>
+                  <div id="favorite_buttons_<%= post.id %>">
+                    <%= render "public/favorites/favorite", post: post %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

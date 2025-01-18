@@ -25,7 +25,7 @@
             <%= @post.created_at.strftime('%P') == 'am' ? '午前' : '午後' %>
             <%= @post.created_at.strftime('%l:%M・%Y年%m月%d日') %>
             <div class="d-flex align-items-center gap-3 border-top border-bottom mb-3 pt-3">
-              <p class="card-text"><i class="fa-regular fa-comment"></i>コメント数 <%= @post.post_comments.count %></p>
+              <p class="mb-0"><i class="fa-regular fa-comment"></i>コメント数 <%= @post.post_comments.count %></p>
               <div id="favorite_buttons_<%= @post.id %>">
                 <%= render "public/favorites/favorite", post: @post %>
               </div>
