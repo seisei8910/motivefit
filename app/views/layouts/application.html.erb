@@ -27,19 +27,25 @@
                 <li>
                   <%= link_to posts_path, class: "nav-link text-dark mx-1" do %>
                     <i class="fa-solid fa-list"></i>
-                    Posts list
+                    投稿一覧
                   <% end %>
                 </li>
                 <li>
                   <%= link_to mypage_path, class: "nav-link text-dark mx-1" do %>
                     <i class="fa-regular fa-user"></i>
-                    My page
+                    マイページ
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to favorite_posts_user_path(current_user.id), class: "nav-link text-dark mx-1" do %>
+                    <i class="fa-regular fa-heart"></i>
+                    いいね一覧
                   <% end %>
                 </li>
                 <li>
                   <%= link_to new_post_path, class: "nav-link text-emerald mx-1" do %>
                     <i class="fa-regular fa-pen-to-square"></i>
-                    New post
+                    新規投稿
                   <% end %>
                 </li>
                 <li>
@@ -51,14 +57,14 @@
               <% else %>
                 <li>
                   <%= link_to "/", class: "nav-link text-dark mx-1" do %>
-                    <i class="fas fa-home"></i>
-                    Home
+                    <i class="fa-solid fa-house"></i>
+                    ホーム
                   <% end %>
                 </li>
                 <li>
                   <%= link_to about_path, class: "nav-link text-dark mx-1" do %>
-                    <i class="fa-solid fa-link"></i>
-                    About
+                    <i class="fa-regular fa-lightbulb"></i>
+                    このサイトについて
                   <% end %>
                 </li>
                 <li>

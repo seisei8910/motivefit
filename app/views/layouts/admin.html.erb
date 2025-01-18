@@ -24,8 +24,8 @@
             <% if admin_signed_in? %>
               <li>
                 <%= link_to admin_dashboards_path, class: "nav-link text-dark ml-1" do %>
-                  <i class="fa-solid fa-table-cells-large"></i>
-                  Dashboard
+                  <i class="fa-solid fa-clipboard-list"></i>
+                  ダッシュボード
                 <% end %>
               </li>
               <li>
@@ -38,13 +38,13 @@
               <li>
                 <%= link_to "/", class: "nav-link text-dark mx-1" do %>
                   <i class="fas fa-home"></i>
-                  Home
+                  ホーム
                 <% end %>
               </li>
               <li>
                 <%= link_to about_path, class: "nav-link text-dark mx-1" do %>
-                  <i class="fa-solid fa-link"></i>
-                  About
+                  <i class="fa-regular fa-lightbulb"></i>
+                  このサイトについて
                 <% end %>
               </li>
               <li>

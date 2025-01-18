@@ -1,13 +1,13 @@
 <% if post.favorited_by?(current_user) %>
   <p class="mb-0">
     <%= link_to post_favorite_path(post), method: :delete, remote: true, data: {"turbolinks" => false}, class: "text-danger" do %>
-      ♥<%= post.favorites.count %> いいね
+      <i class="fa-solid fa-heart"></i><%= post.favorites.count %> いいね
     <% end %>
   </p>
   <% else %>
   <p class="mb-0">
     <%= link_to post_favorite_path(post), method: :post, remote: true, data: {"turbolinks" => false}, class: "text-favorite" do %>
-      ♡<%= post.favorites.count %> いいね
+      <i class="fa-regular fa-heart"></i><%= post.favorites.count %> いいね
     <% end %>
   </p>
 <% end %>

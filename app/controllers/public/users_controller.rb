@@ -22,7 +22,7 @@ class Public::UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id]) 
+    @user = User.find(params[:id])
     @user.destroy
     flash[:notice] = "退会が完了しました。これまでモチベフィットをご利用いただきありがとうございました 🙏✨ またいつでもお待ちしています！"
     redirect_to new_user_registration_path
@@ -33,6 +33,14 @@ class Public::UsersController < ApplicationController
     @post = Post.new
     @posts = @user.posts.order(created_at: :desc)
   end
+
+  def favorite_posts
+    @user = User.find(current_user.id)
+    @post = Post.new
+    favorites = Favorite.where(user_id: @user).pluck(:post_id)
+    @favorite_posts = Post.find(favorites)
+  end
+
 
   private
 
