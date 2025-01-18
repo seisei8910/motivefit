@@ -1,0 +1,18 @@
+<h2 class="font-weight-bold mb-4">プロフィール</h2>
+<div class="card-list-container">
+  <div class="card border border-info rounded-2 shadow-lg mb-4">
+    <div class="card-body">
+      <%= image_tag user.get_profile_image(200,200),
+      class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm mt-3" %>
+      <h6 class="text-center py-4 border-bottom mx-auto d-block"><strong><%= user.name %></strong></h6>
+      <p class="card-text text-center py-3"><%= user.status_message %></p>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <% if user == current_user %>
+    <%= link_to edit_user_path(user.id), class: "btn btn-outline-info btn-block" do %>
+      <i class="fas fa-user-cog"></i>プロフィール編集
+    <% end %>
+  <% end %>
+</div>
