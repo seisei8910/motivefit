@@ -1,49 +1,8 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-4">
-      <h2 class="font-weight-bold mb-4">プロフィール</h2>
-      <div class="card-list-container">
-        <div class="card border border-info rounded-2 shadow-lg mb-4">
-          <div class="card-body">
-            <%= image_tag @user.get_profile_image(200,200),
-            class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm mt-3" %>
-            <h6 class="text-center py-4 border-bottom mx-auto d-block"><strong><%= @user.name %></strong></h6>
-            <p class="card-text text-center py-3"><%= @user.status_message %></p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <% if @user == current_user %>
-          <%= link_to edit_user_path(@user.id), class: "btn btn-outline-info btn-block" do %>
-            <i class="fas fa-user-cog"></i>プロフィール編集
-          <% end %>
-        <% end %>
-      </div>
-      <div class="shadow-lg rounded px-0 my-5 bg-white">
-        <h5 class="text-white bg-emerald p-4 mb-0 rounded-top">投稿フォーム</h5>
-        <div class="form-body p-4">
-          <%= form_with model: @post, class: "mt-3" do |f| %>
-            <div class="form-group">
-              <h6 class="text-dark">フィットネスを行なった日</h6>
-              <%= f.date_field :fitness_date, class: "form-control border-emerald" %>
-            </div>
-            <div class="form-group">
-              <h6 class="text-dark">メニュー</h6>
-              <%= f.text_area :menu, class: "form-control border-emerald", rows: 3, placeholder: "例：ランニング 5km、スクワット 3セット" %>
-            </div>
-            <div class="form-group">
-              <h6 class="text-dark">感想・メモ</h6>
-              <%= f.text_area :body, class: "form-control border-emerald", rows: 3, placeholder: "今日のフィットネスについて記録を残しましょう" %>
-            </div>
-            <div class="form-group">
-              <h6 class="text-dark">画像(任意)</h6>
-              <%= f.file_field :image, accept: "image/*", class: "form-control border-emerald" %>
-            </div>
-            <hr>
-            <%= f.submit '投稿', class: "btn btn-lg btn-block btn-emerald text-white mt-4" %>
-          <% end %>
-        </div>
-      </div>
+      <%= render "public/users/profile", user: @user %>
+      <%= render "public/posts/new_post", post: @post %>
     </div>
     <div class="col-md-7 offset-md-1">
       <% if @model == 'user' %>

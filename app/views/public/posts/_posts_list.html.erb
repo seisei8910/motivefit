@@ -10,6 +10,7 @@
         <%= link_to post_path(post.id) do %>
           <p class="fs-6-50 text-dark"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前</p>
         <% end %>
+        <%= render "public/relationships/btn", user: post.user, options: { class: "fs-6-50 ms-auto "} %>
       </div>
       <%= link_to post_path(post.id) do %>
         <div class="card-body">

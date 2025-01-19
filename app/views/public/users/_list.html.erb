@@ -1,0 +1,35 @@
+<div class="card-list-container">
+  <div class="row">
+    <% @users.each do |user| %>
+      <div class="col-md-6">
+        <div class="card border border-info rounded-2 shadow-lg mb-4">
+          <%= link_to user_path(user.id) do %>
+            <div class="card-body">
+              <%= image_tag user.get_profile_image(150,150),
+              class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm" %>
+              <h6 class="text-center pt-2 text-dark"><strong><%= user.name %></strong></h6>
+              <div class="d-flex align-items-center justify-content-center gap-3">
+                <%= link_to user_followings_path(user) do %>
+                  <p class="text-dark mb-0"><%= user.followings.count %> フォロー</p>
+                <% end %>
+                <%= link_to user_followers_path(user) do %>
+                  <p class="text-dark mb-0"><%= user.followers.count %> フォロワー</p>
+                <% end %>
+              </div>
+              <p class="card-text text-center pt-1 text-dark"><%= user.status_message %></p>
+              <div class="d-flex align-items-center justify-content-center">
+                <% if user == current_user %>
+                  <%= link_to edit_user_path(user.id), class: "btn btn-sm btn-outline-info" do %>
+                    <i class="fas fa-user-cog"></i>プロフィール編集
+                  <% end %>
+                <% else %>
+                  <%= render "public/relationships/btn", user: user, options: { class: ""} %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
