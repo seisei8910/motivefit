@@ -4,7 +4,15 @@
     <div class="card-body">
       <%= image_tag user.get_profile_image(200,200),
       class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm mt-3" %>
-      <h6 class="text-center py-4 border-bottom mx-auto d-block"><strong><%= user.name %></strong></h6>
+      <h6 class="text-center py-4"><strong><%= user.name %></strong></h6>
+      <div class="d-flex align-items-center justify-content-center gap-3">
+        <%= link_to user_followings_path(user) do %>
+          <p class="text-dark"><%= user.followings.count %> フォロー</p>
+        <% end %>
+        <%= link_to user_followers_path(user) do %>
+          <p class="text-dark"><%= user.followers.count %> フォロワー</p>
+        <% end %>
+      </div>
       <p class="card-text text-center py-3"><%= user.status_message %></p>
     </div>
   </div>
@@ -14,5 +22,7 @@
     <%= link_to edit_user_path(user.id), class: "btn btn-outline-info btn-block" do %>
       <i class="fas fa-user-cog"></i>プロフィール編集
     <% end %>
+  <% else %>
+    <%= render "public/relationships/btn", user: user, options: { class: ""} %>
   <% end %>
 </div>
