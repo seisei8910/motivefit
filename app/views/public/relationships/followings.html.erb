@@ -1,10 +1,7 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-4">
-      <%= render "public/users/profile", user: @user %>
-      <%= render "public/posts/new_post", post: @post %>
-    </div>
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
       <h2 class="font-weight-bold mb-4">フォロー</h2>
       <% if @users.exists? %>
         <%= render "public/users/list" %>

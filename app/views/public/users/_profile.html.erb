@@ -5,13 +5,8 @@
       <%= image_tag user.get_profile_image(200,200),
       class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm mt-1" %>
       <h6 class="text-center pt-4 pb-3"><strong><%= user.name %></strong></h6>
-      <div class="d-flex align-items-center justify-content-center gap-3">
-        <%= link_to user_followings_path(user) do %>
-          <p class="text-dark mb-0"><%= user.followings.count %> フォロー</p>
-        <% end %>
-        <%= link_to user_followers_path(user) do %>
-          <p class="text-dark mb-0"><%= user.followers.count %> フォロワー</p>
-        <% end %>
+      <div id="relationships_count" class="d-flex align-items-center justify-content-center gap-3">
+        <%= render "public/relationships/count", user: user %>
       </div>
       <p class="card-text text-center py-3"><%= user.status_message %></p>
       <div class="d-flex align-items-center justify-content-center">
@@ -20,7 +15,9 @@
             <i class="fas fa-user-cog"></i>プロフィール編集
           <% end %>
         <% else %>
-          <%= render "public/relationships/btn", user: user, options: { class: ""} %>
+          <div id="relationships_buttons_<%= user.id %>">
+            <%= render "public/relationships/btn", user: user %>
+          </div>
         <% end %>
       </div>
     </div>

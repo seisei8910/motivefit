@@ -1,0 +1,6 @@
+<%= link_to user_followings_path(user) do %>
+  <p class="text-dark mb-0"><%= user.followings.count %> フォロー</p>
+<% end %>
+<%= link_to user_followers_path(user) do %>
+  <p class="text-dark mb-0"><%= user.followers.count %> フォロワー</p>
+<% end %>
