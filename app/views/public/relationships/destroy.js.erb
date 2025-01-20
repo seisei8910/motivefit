@@ -1,6 +1,2 @@
-$('#relationships_count').html("<%= j(render "public/relationships/count", user: @user) %>");
+$('#relationships_counts_<%= @user.id %>').html("<%= j(render "public/relationships/count", user: @user) %>");
 $('#relationships_buttons_<%= @user.id %>').html("<%= j(render "public/relationships/btn", user: @user) %>");
-
-<% User.all.each do |user| %>
-  $('#relationships_counts_<%= user.id %>').html("<%= j(render 'public/relationships/count', user: user) %>");
-<% end %>
