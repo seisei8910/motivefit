@@ -1,8 +1,22 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-      <h2 class="font-weight-bold mb-4">フォロワー</h2>
+    <div class="col-md-4">
+      <%= render "public/users/profile", user: @user %>
+      <%= render "public/posts/new_post", post: @post %>
+    </div>
+    <div class="col-md-7 offset-md-1">
+      <div class="row border-bottom mb-2">
+        <div class="col-6">
+          <%= link_to user_followings_path(@user) do %>
+            <h3 class="font-weight-bold w-50 mx-auto mb-2 text-center text-secondary">フォロー</h2>
+          <% end %>
+        </div>
+        <div class="col-6">
+          <%= link_to user_followers_path(@user) do %>
+            <h3 class="font-weight-bold w-75 mx-auto mb-2 border-bottom border-5 border-info text-center">フォロワー</h2>
+          <% end %>
+        </div>
+      </div>
       <% if @users.exists? %>
         <%= render "public/users/list" %>
       <% else %>

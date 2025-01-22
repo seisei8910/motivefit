@@ -5,8 +5,8 @@
       <%= image_tag user.get_profile_image(200,200),
       class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm mt-1" %>
       <h6 class="text-center pt-4 pb-3"><strong><%= user.name %></strong></h6>
-      <div id="relationships_counts_<%= user.id %>" class="d-flex align-items-center justify-content-center gap-3">
-        <%= render "public/relationships/count", user: user %>
+      <div class="d-flex align-items-center justify-content-center gap-3">
+        <%= render "public/relationships/count", user: current_user %>
       </div>
       <p class="card-text text-center py-3"><%= user.status_message %></p>
       <div class="d-flex align-items-center justify-content-center">
