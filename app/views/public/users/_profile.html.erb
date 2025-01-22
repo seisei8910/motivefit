@@ -3,16 +3,23 @@
   <div class="card border border-info rounded-2 shadow-lg mb-4">
     <div class="card-body">
       <%= image_tag user.get_profile_image(200,200),
-      class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm mt-3" %>
-      <h6 class="text-center py-4 border-bottom mx-auto d-block"><strong><%= user.name %></strong></h6>
+      class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm mt-1" %>
+      <h6 class="text-center pt-4 pb-3"><strong><%= user.name %></strong></h6>
+      <div class="d-flex align-items-center justify-content-center gap-3">
+        <%= render "public/relationships/count", user: user %>
+      </div>
       <p class="card-text text-center py-3"><%= user.status_message %></p>
+      <div class="d-flex align-items-center justify-content-center">
+        <% if user == current_user %>
+          <%= link_to edit_user_path(user.id), class: "btn btn-sm btn-outline-info" do %>
+            <i class="fas fa-user-cog"></i>プロフィール編集
+          <% end %>
+        <% else %>
+          <div id="relationships_buttons_<%= user.id %>">
+            <%= render "public/relationships/btn", user: user %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <% if user == current_user %>
-    <%= link_to edit_user_path(user.id), class: "btn btn-outline-info btn-block" do %>
-      <i class="fas fa-user-cog"></i>プロフィール編集
-    <% end %>
-  <% end %>
 </div>

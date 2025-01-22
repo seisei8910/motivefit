@@ -1,0 +1,28 @@
+class Public::RelationshipsController < ApplicationController
+  before_action :authenticate_user!
+
+  def create
+    @user = User.find(params[:user_id])
+    current_user.follow(@user)
+    @users = User.all
+  end
+
+  def destroy
+    @user = User.find(params[:user_id])
+    current_user.unfollow(@user)
+    @users = User.all
+  end
+
+  def followings
+    @post = Post.new
+    @user = User.find(params[:user_id])
+    @users = @user.followings
+  end
+
+  def followers
+    @post = Post.new
+    @user = User.find(params[:user_id])
+    @users = @user.followers
+  end
+
+end

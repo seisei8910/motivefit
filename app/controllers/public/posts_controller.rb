@@ -48,6 +48,12 @@ class Public::PostsController < ApplicationController
     end
   end
 
+  def follow_feed
+    @user = current_user
+    @post = Post.new
+    @posts = Post.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc)
+  end
+
   private
 
   def post_params

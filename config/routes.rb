@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     devise_for :users
     root to: "homes#top"
     get "/about", to: "homes#about"
+    get "/follow_feed", to: "posts#follow_feed"
     resources :posts do
       resource :favorite, only: [:create, :destroy]
       resources :post_comments, only: [:create, :destroy]
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
       member do
         get :favorite_posts
       end
+      resource :relationships, only: [:create, :destroy]
+        get "followings" => "relationships#followings", as: "followings"
+        get "followers" => "relationships#followers", as: "followers"
     end
     get "/search", to: "searches#search"
   end
