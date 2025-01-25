@@ -1,6 +1,4 @@
 class Public::RoomsController < ApplicationController
-  before_action :authenticate_user!
-
   def create
     @room = Room.create
     @current_participant = @room.participants.create(user_id: current_user.id)
@@ -9,14 +7,18 @@ class Public::RoomsController < ApplicationController
   end
 
   def index
+    @user = User.find(current_user.id)
+    @post = Post.new
     my_room_id = current_user.participants.pluck(:room_id)
     @another_participants = Participant
-                        .where(room_id: my_room_id)
-                        .where.not(user_id: current_user.id)
-                        .preload(room: :messages).preload(user: { icon_attachment: :blob })
+                            .where(room_id: my_room_id)
+                            .where.not(user_id: current_user.id)
+                            .preload(room: :messages)
   end
 
   def show
+    @user = User.find(current_user.id)
+    @post = Post.new
     @room = Room.find(params[:id])
     if @room.participants.where(user_id: current_user.id).present?
       @messages = @room.messages.all
