@@ -9,7 +9,7 @@
         <%= render "public/relationships/count", user: user %>
       </div>
       <p class="card-text text-center py-3"><%= user.status_message %></p>
-      <div class="d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center gap-3">
         <% if user == current_user %>
           <%= link_to edit_user_path(user.id), class: "btn btn-sm btn-outline-info" do %>
             <i class="fas fa-user-cog"></i>プロフィール編集
@@ -18,6 +18,20 @@
           <div id="relationships_buttons_<%= user.id %>">
             <%= render "public/relationships/btn", user: user %>
           </div>
+          <% if (current_user.following? user) && (user.following? current_user)  %>
+            <% if @is_room == true %>
+              <%= link_to room_path(@room_id), class: "btn btn-sm btn-outline-primary" do %>
+                <i class="fas fa-user-cog"></i>チャットへ
+              <% end %>
+            <% else %>
+              <%= form_with model: @room, local: true do |f| %>
+                <%= fields_for @participant do |e| %>
+                  <%= e.hidden_field :user_id, value: user.id %>
+                <% end %>
+                <%= f.submit "チャットを始める", class:"btn btn-sm btn-primary"%>
+              <% end %>
+            <% end %>
+          <% end %>
         <% end %>
       </div>
     </div>
