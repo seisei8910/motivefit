@@ -21,7 +21,7 @@ class Public::RoomsController < ApplicationController
     if @room.participants.where(user_id: current_user.id).present?
       @messages = @room.messages.all
       @message = Message.new
-      @entries = @room.entries
+      @participants = @room.participants
       @another_participant = @participants.where.not(user_id: current_user.id).first
     else
       redirect_back(fallback_location: root_path)
