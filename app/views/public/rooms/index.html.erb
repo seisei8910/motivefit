@@ -1,0 +1,28 @@
+<% @another_participants.each do |participant| %>
+  <%= link_to room_path(participant.room), style: "text-decoration: none;" do %>
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <div class="d-flex">
+            <div class="chat-avatar">
+              <%= link_to user_path(participant.user) do %>
+                <%= image_tag participant.user.icon, class: "message_icon_img me-3" %>
+              <% end %>
+            </div>
+            <div class="chat-user-name">
+              <span class="fw-bold me-2">
+                <%= participant.user.name %>
+              </span>
+              <span class="username">
+                <%= participant.user.username %>
+              </span>
+            </div>
+          </div>
+          <div class="chat-text">
+            <%= participant.room.messages.last&.message %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
