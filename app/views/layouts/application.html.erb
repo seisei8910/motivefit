@@ -43,6 +43,12 @@
                   <% end %>
                 </li>
                 <li>
+                  <%= link_to rooms_path, class: "nav-link text-dark mx-1" do %>
+                    <i class="fa-regular fa-envelope"></i>
+                    メッセージ
+                  <% end %>
+                </li>
+                <li>
                   <%= link_to new_post_path, class: "nav-link text-emerald mx-1" do %>
                     <i class="fa-regular fa-pen-to-square"></i>
                     新規投稿

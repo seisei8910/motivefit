@@ -1,0 +1,30 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-4">
+      <%= render "public/users/profile", user: @user %>
+      <%= render "public/posts/new_post", post: @post %>
+    </div>
+    <div class="col-md-7 offset-md-1">
+      <h3 class="font-weight-bold mb-4">メッセージ</h3>
+      <% @another_participants.each do |participant| %>
+        <div class="card shadow-lg border border-info">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-1">
+                <%= link_to image_tag(participant.user.get_profile_image(30,30), class:"rounded-circle"), user_path(participant.user.id) %>
+              </div>
+              <div class="col-11">
+                <%= link_to user_path(participant.user.id) do %>
+                  <h6 class="text-dark"><%= participant.user.name %></h6>
+                <% end %>
+                <%= link_to room_path(participant.room) do %>
+                  <p class="text-dark mb-0"><%= participant.room.messages.last&.message %></p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
