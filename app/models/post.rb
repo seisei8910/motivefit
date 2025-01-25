@@ -9,6 +9,12 @@ class Post < ApplicationRecord
   validates :fitness_date, presence: true
   validates :menu, presence: true
 
+  after_create do
+    user.followers.each do |follower|
+      notifications.create(user_id: follower.id)
+    end
+  end
+
   def self.search_for(word, method)
     if method == 'perfect_match'
       Post.where("menu or body ", word, word)
