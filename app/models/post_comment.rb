@@ -6,6 +6,6 @@ class PostComment < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   after_create do
-    create_notification(user_id: post.user_id)
+    notifications.create(user_id: post.user_id) if user_id != post.user_id
   end
 end

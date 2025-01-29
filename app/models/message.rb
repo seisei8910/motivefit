@@ -6,7 +6,7 @@ class Message < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   after_create do
-    recipient_id = participants.where.not(user_id: current_user.id).pluck(:user_id).first
-    create_notification(user_id: recipient_id)
+    recipient_id = room.participants.where.not(user_id: user.id).pluck(:user_id).first
+    notifications.create(user_id: recipient_id)
   end
 end
