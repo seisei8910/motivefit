@@ -1,10 +1,31 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-4">
-      <%= render "public/users/profile", user: @user %>
+    <div class="col-md-3">
+      <% if @users.exists? %>
+        <h3 class="font-weight-bold mb-4">フォローユーザー</h3>
+        <% @users.each do |user| %>
+          <div class="card shadow-lg border border-info">
+            <div class="card-body p-1">
+              <div class="row">
+                <div class="col-1">
+                  <%= link_to image_tag(user.get_profile_image(30,30), class:"rounded-circle"), user_path(user.id) %>
+                </div>
+                <div class="col-10">
+                  <%= link_to user_path(user.id) do %>
+                    <h6 class="text-dark"><%= user.name %></h6>
+                    <p class="text-dark mb-0"><%= user.status_message %></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p>ユーザーはいません</p>
+      <% end %>
       <%= render "new_post", post: @post %>
     </div>
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-8 offset-md-1">
       <div class="row border-bottom mb-2">
         <div class="col-6">
           <%= link_to posts_path do %>
