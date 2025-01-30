@@ -1,11 +1,27 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= render "profile", user: @user %>
       <%= render "public/posts/new_post", post: @post %>
     </div>
-    <div class="col-md-7 offset-md-1">
-      <h2 class="font-weight-bold mb-4">いいね一覧</h2>
+    <div class="col-md-8 offset-md-1">
+      <div class="row border-bottom mb-2">
+        <div class="col-4">
+          <%= link_to posts_path do %>
+            <h3 class="font-weight-bold w-75 mx-auto mb-2 text-center text-secondary">投稿一覧</h3>
+          <% end %>
+        </div>
+        <div class="col-4">
+          <%= link_to follow_feed_path do %>
+            <h3 class="font-weight-bold w-75 mx-auto mb-2 text-center text-secondary">フォロー中</h3>
+          <% end %>
+        </div>
+        <div class="col-4">
+          <%= link_to favorite_posts_user_path(current_user.id) do %>
+            <h3 class="font-weight-bold w-75 mx-auto mb-2 border-bottom border-5 border-success text-success text-center">いいね</h3>
+          <% end %>
+        </div>
+      </div>
       <div class="card-list-container">
         <% @favorite_posts.each do |post| %>
           <div class="card shadow-lg border border-emerald rounded-2 mb-4">
@@ -40,4 +56,3 @@
     </div>
   </div>
 </div>
-<p>いいねした投稿一覧</p>

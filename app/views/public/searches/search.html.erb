@@ -1,23 +1,23 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
       <%= render "public/users/profile", user: @user %>
       <%= render "public/posts/new_post", post: @post %>
     </div>
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-8 offset-md-1">
       <% if @model == 'user' %>
         <h2 class="font-weight-bold mb-4">ユーザー <%= I18n.t("search.method.#{@method}", default: @method) %> 検索結果一覧</h2>
         <div class="card-list-container">
           <div class="row">
             <% @users.each do |user| %>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="card border border-info rounded-2 shadow-lg mb-4">
                   <%= link_to user_path(user.id) do %>
                     <div class="card-body">
                       <%= image_tag user.get_profile_image(150,150),
-                      class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm mt-3" %>
-                      <h6 class="text-center py-4 border-bottom mx-auto d-block text-dark"><strong><%= user.name %></strong></h6>
-                      <p class="card-text text-center py-3 text-dark"><%= user.status_message %></p>
+                      class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm" %>
+                      <h6 class="text-center py-2 border-bottom mx-auto d-block text-dark"><strong><%= user.name %></strong></h6>
+                      <p class="card-text text-center text-dark"><%= user.status_message %></p>
                     </div>
                   <% end %>
                 </div>
