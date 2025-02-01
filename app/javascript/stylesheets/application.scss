@@ -5,6 +5,13 @@
   box-sizing: border-box;
 }
 
+.top-bg {
+  background-image: url("../images/top-bg.png");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
 a:hover{
   text-decoration: none;
 }
