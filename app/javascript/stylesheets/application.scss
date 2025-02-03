@@ -6,10 +6,20 @@
 }
 
 .top-bg {
-  background-image: url("../images/top-bg.png");
+  background-image: url("../images/top.png");
   background-size: cover;
   background-position: center;
   width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+}
+
+.graph_paper-bg {
+  background-image: url("../images/graph_paper.png");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 56.25%;
 }
 
 a:hover{
