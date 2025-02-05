@@ -8,7 +8,6 @@ class Public::RoomsController < ApplicationController
 
   def index
     @user = User.find(current_user.id)
-    @post = Post.new
     my_room_id = current_user.participants.pluck(:room_id)
     @another_participants = Participant
                             .where(room_id: my_room_id)
@@ -18,7 +17,11 @@ class Public::RoomsController < ApplicationController
 
   def show
     @user = User.find(current_user.id)
-    @post = Post.new
+    my_room_id = current_user.participants.pluck(:room_id)
+    @another_participants = Participant
+                            .where(room_id: my_room_id)
+                            .where.not(user_id: current_user.id)
+                            .preload(room: :messages)
     @room = Room.find(params[:id])
     if @room.participants.where(user_id: current_user.id).present?
       @messages = @room.messages.all
