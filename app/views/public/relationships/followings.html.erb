@@ -18,7 +18,7 @@
         </div>
       </div>
       <% if @users.exists? %>
-        <%= render "public/users/list" %>
+        <%= render "public/users/list", users: @users %>
       <% else %>
         <p>ユーザーはいません</p>
       <% end %>

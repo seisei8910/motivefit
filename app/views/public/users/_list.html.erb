@@ -1,6 +1,6 @@
 <div class="card-list-container">
   <div class="row">
-    <% @users.each do |user| %>
+    <% users.each do |user| %>
       <div class="col-md-6">
         <div class="card border border-info rounded-4 shadow-lg mb-4">
           <%= link_to user_path(user.id) do %>
@@ -26,3 +26,4 @@
     <% end %>
   </div>
 </div>
+<%= paginate users %>

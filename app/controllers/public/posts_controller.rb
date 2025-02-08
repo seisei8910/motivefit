@@ -26,7 +26,7 @@ class Public::PostsController < ApplicationController
   def index
     @user = current_user
     @post = Post.new
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.all.order(created_at: :desc).page(params[:page])
   end
 
   def show
@@ -52,7 +52,7 @@ class Public::PostsController < ApplicationController
     @users = current_user.followings
     @user = current_user
     @post = Post.new
-    @posts = Post.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc)
+    @posts = Post.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc).page(params[:page])
   end
 
   private

@@ -7,51 +7,10 @@
     <div class="col-md-8">
       <% if @model == 'user' %>
         <h2 class="font-weight-bold mb-4">ユーザー <%= I18n.t("search.method.#{@method}", default: @method) %> 検索結果一覧</h2>
-        <div class="card-list-container">
-          <div class="row">
-            <% @users.each do |user| %>
-              <div class="col-md-4">
-                <div class="card border border-info rounded-2 shadow-lg mb-4">
-                  <%= link_to user_path(user.id) do %>
-                    <div class="card-body">
-                      <%= image_tag user.get_profile_image(150,150),
-                      class:"rounded-circle img-fluid object-fit-cover mx-auto d-block shadow-sm" %>
-                      <h6 class="text-center py-2 border-bottom mx-auto d-block text-dark"><strong><%= user.name %></strong></h6>
-                      <p class="card-text text-center text-dark"><%= user.status_message %></p>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
+        <%= render "public/users/list", users: @users %>
       <% elsif @model == 'post' %>
-        <h2 class="font-weight-bold mb-4">投稿 <%= I18n.t("search.method.#{@method}", default: @method) %> 検索結果一覧</h2>
-        <div class="card-list-container">
-          <% @posts.each do |post| %>
-            <div class="card shadow-lg border border-emerald rounded-2 mb-4">
-              <div class="card-header d-flex align-items-center gap-3">
-                <%= link_to image_tag(post.user.get_profile_image(30,30), class:"rounded-circle"), user_path(post.user.id) %>
-                <%= link_to user_path(post.user.id) do %>
-                  <h6 class="text-black"><%= post.user.name %></h6>
-                <% end %>
-                <%= link_to post_path(post.id) do %>
-                  <p class="fs-6-50 text-black"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(post.created_at) %>前</p>
-                <% end %>
-              </div>
-              <%= link_to post_path(post.id) do %>
-                <div class="card-body">
-                  <p class="card-text text-dark border-bottom"><strong>日付:</strong> <%= post.fitness_date.strftime("%Y年%m月%d日") %></p>
-                  <p class="card-text text-dark border-bottom"><strong>メニュー:</strong> <%= post.menu %></p>
-                  <p class="card-text text-dark border-bottom"><strong>感想・メモ:</strong> <%= post.body %></p>
-                  <% if post.image.attached? %>
-                    <%= image_tag post.get_image(200,200), class:"img-fluid object-fit-cover rounded-4 mx-auto d-block shadow-sm" %>
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
+        <h3 class="font-weight-bold mb-4">投稿 <%= I18n.t("search.method.#{@method}", default: @method) %> 検索結果一覧</h3>
+        <%= render "public/posts/posts_list", posts: @posts %>
       <% end %>
     </div>
   </div>
