@@ -5,6 +5,13 @@
       <%= render "public/posts/new_post", post: @post %>
     </div>
     <div class="col-md-8">
+      <h3 class="font-weight-bold mb-4">
+        <% if @user == current_user %>
+          あなたの投稿
+        <% else %>
+          <%= @user.name %> さんの投稿
+        <% end %>
+      </h3>
       <%= render "public/posts/posts_list", posts: @posts %>
     </div>
   </div>
