@@ -11,8 +11,10 @@
       <p class="card-text text-center"><%= user.status_message %></p>
       <div class="d-flex align-items-center justify-content-center gap-3">
         <% if user == current_user %>
-          <%= link_to edit_user_path(user.id), class: "btn btn-sm btn-outline-info rounded-4" do %>
-            <i class="fas fa-user-cog"></i>プロフィール編集
+          <% unless user.guest_user? %>
+            <%= link_to edit_user_path(user.id), class: "btn btn-sm btn-outline-info rounded-4" do %>
+              <i class="fas fa-user-cog"></i>プロフィール編集
+            <% end %>
           <% end %>
         <% else %>
           <div id="relationships_buttons_<%= user.id %>">
