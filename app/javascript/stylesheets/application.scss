@@ -159,12 +159,12 @@ a:hover{
   color: #696969;
 }
 
-.pagination>.active>a {
-  background: #93c9ff;
+.page-item.active .page-link {
+  background: #a2e5d1;
   border-radius: 15px;
 }
 
-.pagination>li>a:hover {
+.page-link:hover {
   border-radius: 15px;
 }
 
@@ -174,4 +174,12 @@ a:hover{
 
 .page-link {
   background-color: transparent;
+}
+
+.page-item:first-child .page-link {
+  border-radius: 15px;
+}
+
+.page-item:last-child .page-link {
+  border-radius: 15px;
 }
