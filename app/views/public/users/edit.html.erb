@@ -9,28 +9,28 @@
     </ul>
   </div>
 <% end %>
-<div class="container">
-  <div class="row g-0 justify-content-center">
-    <div class="col-md-6 col-sm-10 shadow-lg rounded px-0 my-5 bg-white">
-      <h5 class="text-white bg-info p-4 mb-0 rounded-top">プロフィール編集フォーム</h5>
+<div class="container-fluid">
+  <div class="row graph_paper-bg justify-content-center">
+    <div class="col-md-5 col-sm-9 shadow-lg rounded-4 px-0 my-5 bg-white">
+      <h5 class="text-white bg-info p-4 mb-0 rounded-top-4">プロフィール編集フォーム</h5>
       <div class="form-body p-4">
         <%= form_with model: @user do |f| %>
           <div class="form-group">
             <h6 class="text-dark">名前</h6>
-            <%= f.text_field :name, class: "form-control border-info"%>
+            <%= f.text_field :name, class: "form-control border-info rounded-4"%>
           </div>
           <div class="form-group">
             <h6 class="text-dark">プロフィール画像（任意）</h6>
-            <%= f.file_field :profile_image, class: "form-control border-info", accept: "image/*" %>
+            <%= f.file_field :profile_image, class: "form-control border-info rounded-4", accept: "image/*" %>
           </div>
           <div class="form-group">
             <h6 class="text-dark">ひとこと（任意）</h6>
-            <%= f.text_field :status_message, class: "form-control border-info"%>
+            <%= f.text_field :status_message, class: "form-control border-info rounded-4"%>
           </div>
           <div class="form-group">
-            <%= f.submit "変更を保存", class: "btn btn-lg btn-block btn-info text-white mt-4" %>
+            <%= f.submit "変更を保存", class: "btn btn-lg btn-block btn-info text-white mt-4 rounded-4" %>
           </div>
-          <%= link_to user_path(current_user.id), class: "btn btn-outline-danger btn-block",method: :delete, "data-confirm" => "本当に退会しますか？" do %>
+          <%= link_to user_path(current_user.id), class: "btn btn-outline-danger btn-block rounded-4",method: :delete, "data-confirm" => "本当に退会しますか？" do %>
             <i class="fa-solid fa-door-open"></i></i> 退会
           <% end %>
         <% end %>

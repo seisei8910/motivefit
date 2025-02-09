@@ -4,7 +4,7 @@
       <%= render "public/users/profile", user: @user %>
       <%= render "public/posts/new_post", post: @post %>
     </div>
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-8">
       <div class="row border-bottom mb-2">
         <div class="col-6">
           <%= link_to user_followings_path(@user) do %>
@@ -18,7 +18,7 @@
         </div>
       </div>
       <% if @users.exists? %>
-        <%= render "public/users/list" %>
+        <%= render "public/users/list", users: @users %>
       <% else %>
         <p>ユーザーはいません</p>
       <% end %>

@@ -1,25 +1,25 @@
-<div class="container d-flex align-items-center justify-content-center">
-  <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6 shadow-lg rounded p-4 bg-white">
-    <h1>
-      仲間と続けるフィットネス <br><strong>モチベフィット</strong> !!
-    </h1>
-    <p><strong>モチベフィット</strong>は、フィットネスを楽しむ仲間とつながるSNSです。</p>
-    <p>あなたのトレーニング記録を投稿したり、他のメンバーの頑張りを応援したり。</p>
-    <p>仲間との交流が、習慣化や目標達成の力になります。</p>
-    <p>一緒に成長しながら、楽しいフィットネスライフを送りましょう！</p>
-    <div class="btn-wrapper col-10 mx-auto">
-      <% if user_signed_in? %>
-        <div class="row">
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-sm btn-block log_out" %>
-        </div>
-      <% else %>
-        <div class="row">
-          <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
-        </div>
-        <div class="row">
-          <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
-        </div>
-      <% end %>
+<div class="container-fluid align-items-center justify-content-center">
+  <div class="row top-bg img-fluid"></div>
+  <div class="row graph_paper-bg d-flex justify-content-center align-items-center">
+    <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6 p-4">
+      <p><strong>モチベフィット</strong>は、フィットネスを楽しむ仲間とつながるSNSです。</p>
+      <p>あなたのトレーニング記録を投稿したり、他のメンバーの頑張りを応援したり。</p>
+      <p>仲間との交流が、習慣化や目標達成の力になります。</p>
+      <p>一緒に成長しながら、楽しいフィットネスライフを送りましょう！</p>
+      <div class="btn-wrapper col-10 mx-auto">
+        <% if user_signed_in? %>
+          <div class="row">
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-sm btn-block log_out" %>
+          </div>
+        <% else %>
+          <div class="row">
+            <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+          </div>
+          <div class="row">
+            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

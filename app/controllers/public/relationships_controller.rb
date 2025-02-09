@@ -14,7 +14,7 @@ class Public::RelationshipsController < ApplicationController
   def followings
     @post = Post.new
     @user = User.find(params[:user_id])
-    @users = @user.followings
+    @users = @user.followings.page(params[:page])
     @current_participant = Participant.where(user_id: current_user.id)
     @another_participant = Participant.where(user_id: @user.id)
     unless @user.id == current_user.id
@@ -36,7 +36,7 @@ class Public::RelationshipsController < ApplicationController
   def followers
     @post = Post.new
     @user = User.find(params[:user_id])
-    @users = @user.followers
+    @users = @user.followers.page(params[:page])
     @current_participant = Participant.where(user_id: current_user.id)
     @another_participant = Participant.where(user_id: @user.id)
     unless @user.id == current_user.id

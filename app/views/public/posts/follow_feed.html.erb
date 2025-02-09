@@ -1,19 +1,46 @@
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-4">
-      <%= render "public/users/profile", user: @user %>
+      <% if @users.exists? %>
+        <h3 class="font-weight-bold mb-4">フォローユーザー</h3>
+        <% @users.each do |user| %>
+          <div class="card shadow-lg border border-info rounded-4">
+            <div class="card-body p-1">
+              <div class="row">
+                <div class="col-1">
+                  <%= link_to image_tag(user.get_profile_image(30,30), class:"rounded-circle"), user_path(user.id) %>
+                </div>
+                <div class="col-10">
+                  <%= link_to user_path(user.id) do %>
+                    <h6 class="text-dark"><%= user.name %></h6>
+                    <p class="text-dark mb-0"><%= user.status_message %></p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <%= paginate @users %>
+      <% else %>
+        <p>ユーザーはいません</p>
+      <% end %>
       <%= render "new_post", post: @post %>
     </div>
-    <div class="col-md-7 offset-md-1">
+    <div class="col-md-8">
       <div class="row border-bottom mb-2">
-        <div class="col-6">
+        <div class="col-4">
           <%= link_to posts_path do %>
-            <h3 class="font-weight-bold w-50 mx-auto mb-2 text-center text-secondary">投稿一覧</h3>
+            <h3 class="font-weight-bold w-75 mx-auto mb-2 text-center text-secondary">投稿一覧</h3>
           <% end %>
         </div>
-        <div class="col-6">
+        <div class="col-4">
           <%= link_to follow_feed_path do %>
             <h3 class="font-weight-bold w-75 mx-auto mb-2 border-bottom border-5 border-success text-success text-center">フォロー中</h3>
+          <% end %>
+        </div>
+        <div class="col-4">
+          <%= link_to favorite_posts_user_path(current_user.id) do %>
+            <h3 class="font-weight-bold w-75 mx-auto mb-2 text-center text-secondary">いいね</h3>
           <% end %>
         </div>
       </div>
