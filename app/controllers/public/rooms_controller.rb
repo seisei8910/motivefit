@@ -13,6 +13,7 @@ class Public::RoomsController < ApplicationController
                             .where(room_id: my_room_id)
                             .where.not(user_id: current_user.id)
                             .preload(room: :messages)
+                            .page(params[:page])
   end
 
   def show
@@ -22,6 +23,7 @@ class Public::RoomsController < ApplicationController
                             .where(room_id: my_room_id)
                             .where.not(user_id: current_user.id)
                             .preload(room: :messages)
+                            .page(params[:page])
     @room = Room.find(params[:id])
     if @room.participants.where(user_id: current_user.id).present?
       @messages = @room.messages.all

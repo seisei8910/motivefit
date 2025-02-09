@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
   def mypage
     @user = User.find(current_user.id)
     @post = Post.new
-    @posts = @user.posts.order(created_at: :desc).page(params[:page])
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(4)
   end
 
   def edit
@@ -31,7 +31,7 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post = Post.new
-    @posts = @user.posts.order(created_at: :desc).page(params[:page])
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(4)
     @current_participant = Participant.where(user_id: current_user.id)
     @another_participant = Participant.where(user_id: @user.id)
     unless @user.id == current_user.id
@@ -54,7 +54,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(current_user.id)
     @post = Post.new
     favorites = Favorite.where(user_id: @user).pluck(:post_id)
-    @favorite_posts = Post.where(id: favorites).order(created_at: :desc).page(params[:page])
+    @favorite_posts = Post.where(id: favorites).order(created_at: :desc).page(params[:page]).per(4)
   end
 
 

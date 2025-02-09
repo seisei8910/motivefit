@@ -12,18 +12,15 @@
               <div class="col-1">
                 <%= link_to image_tag(participant.user.get_profile_image(30,30), class:"rounded-circle"), user_path(participant.user.id) %>
               </div>
-              <div class="col-11">
-                <%= link_to user_path(participant.user.id) do %>
-                  <h6 class="text-dark"><%= participant.user.name %></h6>
-                <% end %>
-                <%= link_to room_path(participant.room) do %>
-                  <p class="text-dark mb-0"><%= participant.room.messages.last&.message %></p>
-                <% end %>
-              </div>
+              <%= link_to room_path(participant.room), class: "col-11" do %>
+                <h6 class="text-dark"><%= participant.user.name %></h6>
+                <p class="text-dark mb-0"><%= participant.room.messages.last&.message %></p>
+              <% end %>
             </div>
           </div>
         </div>
       <% end %>
+      <%= paginate @another_participants %>
     </div>
   </div>
 </div>
