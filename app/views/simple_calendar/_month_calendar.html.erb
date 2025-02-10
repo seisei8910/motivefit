@@ -1,0 +1,61 @@
+<div class="simple-calendar border rounded-4 shadow-sm mb-4">
+  <!-- ヘッダー -->
+  <div class="calendar-heading d-flex align-items-center justify-content-between p-3 bg-light rounded-top-4">
+    <time datetime="<%= start_date.strftime('%Y-%m') %>" class="calendar-title fs-5 fw-bold">
+      <%= start_date.year %>年 <%= t('date.month_names')[start_date.month] %>
+    </time>
+
+    <!-- ナビゲーション -->
+    <nav class="d-flex gap-2">
+      <%= link_to calendar.url_for_previous_view, class: "btn btn-outline-info btn-sm d-flex align-items-center" do %>
+        <i class="fa-solid fa-chevron-left fa-lg"></i>
+      <% end %>
+
+      <%= link_to calendar.url_for_today_view, class: "btn btn-info btn-sm fw-bold d-flex align-items-center" do %>
+        <i class="fa-regular fa-calendar fa-lg"></i> 今月
+      <% end %>
+
+      <%= link_to calendar.url_for_next_view, class: "btn btn-outline-info btn-sm d-flex align-items-center" do %>
+        <i class="fa-solid fa-chevron-right fa-lg"></i>
+      <% end %>
+    </nav>
+  </div>
+
+  <!-- カレンダー本体 -->
+  <table class="table table-bordered text-center">
+    <thead class="table-light">
+      <tr>
+        <% date_range.slice(0, 7).each do |day| %>
+          <th class="fw-bold text-info"><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% date_range.each_slice(7) do |week| %>
+        <tr>
+          <% week.each do |day| %>
+            <% classes = ["p-3 rounded-2 "] %>
+            <% classes << "bg-info text-white" if day == Date.today %>
+            <% classes << "bg-success text-white" if calendar.sorted_events_for(day).any? %>
+
+            <%= content_tag :td, class: classes.join(" ") do %>
+              <!-- 日付を表示 -->
+              <div class="date">
+                <%= day.day %>
+              </div>
+              <!-- イベントがあれば表示 -->
+              <% if calendar.sorted_events_for(day).any? %>
+                <div class="events">
+                  <% calendar.sorted_events_for(day).each do |event| %>
+                    🌟
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

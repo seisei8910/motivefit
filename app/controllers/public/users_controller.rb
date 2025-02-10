@@ -6,6 +6,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(current_user.id)
     @post = Post.new
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(4)
+    @events = @user.posts
   end
 
   def edit
