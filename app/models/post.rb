@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :notifications, as: :notifiable, dependent: :destroy
 
-  validates :fitness_date, presence: true
+  validates :start_time, presence: true
   validates :menu, presence: true
 
   after_create do
