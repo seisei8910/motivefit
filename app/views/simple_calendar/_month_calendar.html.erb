@@ -35,11 +35,11 @@
       <% date_range.each_slice(7) do |week| %>
         <tr>
           <% week.each do |day| %>
-            <% classes = ["p-3 rounded-2 "] %>
+            <% classes = ["p-3 rounded-2 btn d-table-cell"] %>
             <% classes << "bg-info text-white" if day == Date.today %>
             <% classes << "bg-success text-white" if calendar.sorted_events_for(day).any? %>
 
-            <%= content_tag :td, class: classes.join(" ") do %>
+            <%= content_tag :td, class: classes.join(" "), data: { toggle: "modal", target: "#testModal" } do %>
               <!-- 日付を表示 -->
               <div class="date">
                 <%= day.day %>
