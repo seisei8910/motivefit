@@ -39,7 +39,7 @@
             <% classes << "bg-info text-white" if day == Date.today %>
             <% classes << "bg-success text-white" if calendar.sorted_events_for(day).any? %>
 
-            <%= content_tag :td, class: classes.join(" "), data: { toggle: "modal", target: "#testModal" } do %>
+            <%= content_tag :td, class: classes.join(" "), data: { bs_toggle: "modal", bs_target: "#testModal" } do %>
               <!-- 日付を表示 -->
               <div class="date">
                 <%= day.day %>
@@ -56,6 +56,23 @@
           <% end %>
         </tr>
       <% end %>
+      <div class="modal fade" id="testModal" tabindex="-1" aria-labelledby="testModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="testModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </tbody>
   </table>
 </div>
