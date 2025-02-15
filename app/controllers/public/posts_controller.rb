@@ -2,7 +2,7 @@ class Public::PostsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
 
   def new
-    @post = Post.new
+    @post = Post.new(start_time: params[:date])
   end
 
   def create
@@ -58,7 +58,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:fitness_date, :menu, :body, :image)
+    params.require(:post).permit(:start_time, :menu, :body, :image)
   end
 
   def is_matching_login_user

@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("turbolinks:load", function () {
   var modal = document.getElementById("calendarModal");
 
   modal.addEventListener("show.bs.modal", function (event) {
@@ -6,8 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
     var date = button.getAttribute("data-date"); // 日付を取得
     var events = JSON.parse(button.getAttribute("data-events")); // イベントを取得
 
+    var formattedDate = new Date(date).toLocaleDateString('ja-JP', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+
     // モーダルに日付を表示
-    document.getElementById("modalDate").textContent = date;
+    document.getElementById("modalDate").textContent = formattedDate;
 
     // イベントリストを更新
     var eventList = document.getElementById("modalEvents");
@@ -17,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
       events.forEach(function (event) {
         var li = document.createElement("li");
         li.className = "list-group-item";
-        li.innerHTML = `<a href="/events/${event.id}" class="text-decoration-none">${event.title}</a>`;
+        li.innerHTML = `<a href="/posts/${event.id}" class="text-decoration-none">${event.menu}</a>`;
         eventList.appendChild(li);
       });
     } else {
@@ -29,6 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 新規投稿ボタンのリンクを設定
     var newEventLink = document.getElementById("newEventLink");
-    newEventLink.href = `/events/new?date=${date}`;
+    newEventLink.href = `/posts/new?date=${date}`;
   });
 });
