@@ -25,7 +25,6 @@ class Public::PostsController < ApplicationController
 
   def index
     @user = current_user
-    @post = Post.new
     @posts = Post.all.order(created_at: :desc).page(params[:page]).per(4)
   end
 
@@ -49,9 +48,8 @@ class Public::PostsController < ApplicationController
   end
 
   def follow_feed
-    @users = current_user.followings.page(params[:page])
+    @users = current_user.followings.page(params[:page]).per(8)
     @user = current_user
-    @post = Post.new
     @posts = Post.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc).page(params[:page]).per(4)
   end
 
