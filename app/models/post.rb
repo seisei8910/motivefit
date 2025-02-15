@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   has_many :notifications, as: :notifiable, dependent: :destroy
 
   validates :start_time, presence: true
-  validates :menu, presence: true
+  validates :title, presence: true
 
   after_create do
     user.followers.each do |follower|

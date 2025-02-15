@@ -58,11 +58,11 @@ a:hover{
 }
 
 .bg-lightblue {
-  background-color: #add8e6 !important;
+  background-color: #a2e5d1 !important;
 }
 
-.bg-orange {
-  background-color: #ffd232 !important;
+.bg-yellow {
+  background-color: #ffdf68 !important;
 }
 
 .btn-emerald {
@@ -72,11 +72,13 @@ a:hover{
 }
 
 .btn-emerald:hover {
+  color: #fff;
   background-color: #27ae60;
   transform: scale(1.05);
 }
 
 .btn-emerald:active {
+  color: #fff;
   background-color: #1e8449;
   transform: scale(0.95);
 }
@@ -190,4 +192,28 @@ a:hover{
 
 .chat-body {
   height: 650px;
+}
+
+.btn-calendar-today {
+  color: #fff;
+    background-color: #17a2b8 !important;
+    border-color: #17a2b8;
+}
+
+.btn-calendar-today:hover {
+  color: #fff;
+  background-color: rgb(18.75, 132.0652173913, 150)!important;
+  border-color: rgb(17.3333333333, 122.0869565217, 138.6666666667);
+}
+
+.btn-calendar-event {
+  color: #fff;
+    background-color: #ffdf68 !important;
+    border-color: #fad758;
+}
+
+.btn-calendar-event:hover {
+  color: #fff;
+  background-color: rgb(241, 203, 63) !important;
+  border-color: rgb(241, 203, 63);
 }

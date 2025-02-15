@@ -1,4 +1,4 @@
-<div class="simple-calendar border rounded-4 shadow-sm mb-4">
+<div class="simple-calendar border border-info rounded-4 shadow-sm mb-4">
   <!-- ヘッダー -->
   <div class="calendar-heading d-flex align-items-center justify-content-between p-3 bg-light rounded-top-4">
     <time datetime="<%= start_date.strftime('%Y-%m') %>" class="calendar-title fs-5 fw-bold">
@@ -7,15 +7,15 @@
 
     <!-- ナビゲーション -->
     <nav class="d-flex gap-2">
-      <%= link_to calendar.url_for_previous_view, class: "btn btn-outline-info btn-sm d-flex align-items-center" do %>
+      <%= link_to calendar.url_for_previous_view, class: "btn btn-outline-info btn-sm rounded-4 d-flex align-items-center" do %>
         <i class="fa-solid fa-chevron-left fa-lg"></i>
       <% end %>
 
-      <%= link_to calendar.url_for_today_view, class: "btn btn-info btn-sm fw-bold d-flex align-items-center" do %>
+      <%= link_to calendar.url_for_today_view, class: "btn btn-info btn-sm rounded-4 fw-bold d-flex align-items-center" do %>
         <i class="fa-regular fa-calendar fa-lg"></i> 今月
       <% end %>
 
-      <%= link_to calendar.url_for_next_view, class: "btn btn-outline-info btn-sm d-flex align-items-center" do %>
+      <%= link_to calendar.url_for_next_view, class: "btn btn-outline-info btn-sm rounded-4 d-flex align-items-center" do %>
         <i class="fa-solid fa-chevron-right fa-lg"></i>
       <% end %>
     </nav>
@@ -36,8 +36,9 @@
         <tr>
           <% week.each do |day| %>
             <% classes = ["p-3 rounded-2 btn d-table-cell"] %>
-            <% classes << "bg-info text-white" if day == Date.today %>
-            <% classes << "bg-success text-white" if calendar.sorted_events_for(day).any? %>
+            <% classes << "btn-light" if day != Date.today %>
+            <% classes << "btn-calendar-today text-white" if day == Date.today %>
+            <% classes << "btn-calendar-event text-white" if calendar.sorted_events_for(day).any? && day != Date.today %>
 
             <%= content_tag :td, class: classes.join(" "),
             data: { bs_toggle: "modal", bs_target: "#calendarModal", date: day, events: calendar.sorted_events_for(day).to_json } do %>
@@ -58,20 +59,20 @@
         </tr>
       <% end %>
       <div class="modal fade" id="calendarModal" tabindex="-1" aria-labelledby="calendarModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded-4">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="calendarModalLabel">予定詳細</h1>
+              <h1 class="modal-title fs-5" id="calendarModalLabel">
+                <span id="modalDate"></span>の詳細
+              </h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <p id="modalDate"></p>
-              <h5>投稿内容</h5>
-              <ul id="modalEvents" class="list-group"></ul>
+              <h5>投稿一覧</h5>
+              <ul id="modalEvents" class="list-group rounded-4"></ul>
             </div>
             <div class="modal-footer">
-              <a href="#" id="newEventLink" class="btn btn-primary">新規投稿</a>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <a href="#" id="newEventLink" class="btn btn-emerald rounded-4">新規投稿</a>
             </div>
           </div>
         </div>

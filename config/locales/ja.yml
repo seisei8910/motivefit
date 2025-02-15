@@ -38,8 +38,9 @@ ja:
         name: 名前
         status_message: ひとこと
       post:
+        title: タイトル
         body: 感想・メモ
-        fitness_date: フィットネスを行なった日
+        start_time: フィットネスを行なった日
         menu: メニュー
   search:
     method:

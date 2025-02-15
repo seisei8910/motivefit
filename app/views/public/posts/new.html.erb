@@ -20,6 +20,10 @@
             <%= f.datetime_field :start_time, class: "form-control border-emerald rounded-4" %>
           </div>
           <div class="form-group">
+            <h6 class="text-dark">タイトル</h6>
+            <%= f.text_field :title, class: "form-control border-emerald rounded-4", placeholder: "例：朝ランニング5km完了 気分爽快！" %>
+          </div>
+          <div class="form-group">
             <h6 class="text-dark">メニュー</h6>
             <%= f.text_area :menu, class: "form-control border-emerald rounded-4", rows: '3', placeholder: "例：ランニング 5km、スクワット 3セット" %>
           </div>
