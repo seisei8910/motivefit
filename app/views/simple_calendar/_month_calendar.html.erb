@@ -38,7 +38,8 @@
             <% classes = ["p-3 rounded-2 btn d-table-cell"] %>
             <% classes << "btn-light" if day != Date.today %>
             <% classes << "btn-calendar-today text-white" if day == Date.today %>
-            <% classes << "btn-calendar-event text-white" if calendar.sorted_events_for(day).any? && day != Date.today %>
+            <% classes << "btn-calendar-event text-white" if calendar.sorted_events_for(day).any? && day != Date.today && day.month == start_date.month %>
+            <% classes << "bg-secondary-subtle text-secondary" if day.month != start_date.month %>
 
             <%= content_tag :td, class: classes.join(" "),
             data: { bs_toggle: "modal", bs_target: "#calendarModal", date: day, events: calendar.sorted_events_for(day).to_json } do %>
@@ -50,7 +51,7 @@
               <% if calendar.sorted_events_for(day).any? %>
                 <div class="events">
                   <% calendar.sorted_events_for(day).each do |event| %>
-                    ●
+                    <span>●</span>
                   <% end %>
                 </div>
               <% end %>

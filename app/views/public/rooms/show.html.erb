@@ -50,7 +50,7 @@
           <div class="chat-form-group d-flex">
             <%= f.text_field :message, class: "form-control mr-2 flex-grow-1 rounded-4" %>
             <%= f.number_field :room_id, value: @room.id, hidden: true %>
-            <%= f.submit "送信", class: "btn btn-light message_submit rounded-4" %>
+            <%= f.submit "送信", class: "btn btn-outline-secondary message_submit rounded-4" %>
           </div>
         <% end %>
       </div>

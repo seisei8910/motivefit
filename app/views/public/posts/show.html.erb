@@ -11,8 +11,8 @@
             <% end %>
             <p class="fs-6-50 text-black"><i class="far fa-clock clock-icon"></i><%= time_ago_in_words(@post.created_at) %>前</p>
             <% if @post.user == current_user %>
-              <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-sm btn-info ms-auto rounded-4" %>
-              <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-sm btn-danger rounded-4", "data-confirm" => "本当に消しますか?" %>
+              <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-sm btn-outline-info ms-auto rounded-4" %>
+              <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-sm btn-outline-danger rounded-4", "data-confirm" => "本当に消しますか?" %>
             <% end %>
           </div>
           <div class="card-body">
@@ -34,7 +34,7 @@
             <%= form_with model: [@post, @post_comment] do |f| %>
               <%= f.text_area :comment, class: "form-control rounded-4", rows: '2', placeholder: "コメントをここに" %>
               <div class="d-flex">
-                <%= f.submit "送信", class: "btn btn-sm btn-secondary ms-auto mt-2 rounded-4" %>
+                <%= f.submit "送信", class: "btn btn-sm btn-outline-secondary ms-auto mt-2 rounded-4" %>
               </div>
             <% end %>
           </div>
