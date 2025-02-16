@@ -2,7 +2,7 @@ class Public::PostsController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
 
   def new
-    @post = Post.new
+    @post = Post.new(start_time: params[:date])
   end
 
   def create
@@ -25,7 +25,6 @@ class Public::PostsController < ApplicationController
 
   def index
     @user = current_user
-    @post = Post.new
     @posts = Post.all.order(created_at: :desc).page(params[:page]).per(4)
   end
 
@@ -49,16 +48,15 @@ class Public::PostsController < ApplicationController
   end
 
   def follow_feed
-    @users = current_user.followings.page(params[:page])
+    @users = current_user.followings.page(params[:page]).per(8)
     @user = current_user
-    @post = Post.new
     @posts = Post.where(user_id: [current_user.id, *current_user.following_ids]).order(created_at: :desc).page(params[:page]).per(4)
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:fitness_date, :menu, :body, :image)
+    params.require(:post).permit(:start_time, :title, :menu, :body, :image)
   end
 
   def is_matching_login_user

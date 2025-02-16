@@ -4,8 +4,8 @@ class Public::UsersController < ApplicationController
 
   def mypage
     @user = User.find(current_user.id)
-    @post = Post.new
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(4)
+    @events = @user.posts
   end
 
   def edit
@@ -31,7 +31,6 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @post = Post.new
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(4)
     @current_participant = Participant.where(user_id: current_user.id)
     @another_participant = Participant.where(user_id: @user.id)

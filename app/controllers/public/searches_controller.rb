@@ -1,7 +1,6 @@
 class Public::SearchesController < ApplicationController
   def search
     @user = User.find(current_user.id)
-    @post = Post.new
 
     @model = params[:model]
     @word = params[:word]

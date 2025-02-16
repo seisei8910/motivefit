@@ -12,7 +12,6 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def followings
-    @post = Post.new
     @user = User.find(params[:user_id])
     @users = @user.followings.page(params[:page])
     @current_participant = Participant.where(user_id: current_user.id)
@@ -34,7 +33,6 @@ class Public::RelationshipsController < ApplicationController
   end
 
   def followers
-    @post = Post.new
     @user = User.find(params[:user_id])
     @users = @user.followers.page(params[:page])
     @current_participant = Participant.where(user_id: current_user.id)

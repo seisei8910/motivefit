@@ -69,3 +69,5 @@ gem "net-pop"
 gem "net-imap"
 
 gem 'jquery-rails'
+
+gem 'simple_calendar'

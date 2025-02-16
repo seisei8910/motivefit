@@ -19,40 +19,43 @@
       <% end %>
       <%= paginate @another_participants %>
     </div>
-    <div class="col-sm-10 col-md-8 chat-content border-end border-start border-bottom rounded-4">
+    <div class="col-sm-10 col-md-8">
       <h3 class="font-weight-bold mb-4"><%= @another_participant.user.name %>さんとのメッセージ</h3>
-      <div class="chat-body p-3 flex-grow-1 overflow-auto" id="area">
-        <% @messages.each do |m| %>
-          <% if m.user_id == current_user.id %>
-            <div class="d-flex justify-content-end mb-3">
-              <div class="mycomment p-2 rounded-4 d-inline-block">
-                <%= m.message %>
-              </div>
-            </div>
-          <% else %>
-            <div class="d-flex justify-content-start mb-3">
-              <div class="fukidasi d-flex">
-                <div class="faceicon">
-                  <%= image_tag m.user.get_profile_image(30,30), class: "message_icon_img mr-2" %>
+      <div class="chat-content">
+        <div class="chat-header border-top border-end border-start border-info rounded-top-4 h-1"></div>
+        <div class="chat-body border-end border-start border-info p-4 flex-grow-1 overflow-auto" id="area">
+          <% @messages.each do |m| %>
+            <% if m.user_id == current_user.id %>
+              <div class="d-flex justify-content-end mb-3">
+                <div class="mycomment p-2 rounded-4 d-inline-block">
+                  <%= m.message %>
                 </div>
-                <div class="chatting p-2 rounded-4 bg-light d-inline-block">
-                  <div class="says">
-                    <%= m.message %>
+              </div>
+            <% else %>
+              <div class="d-flex justify-content-start mb-3">
+                <div class="fukidasi d-flex">
+                  <div class="faceicon">
+                    <%= image_tag m.user.get_profile_image(30,30), class: "message_icon_img mr-2" %>
+                  </div>
+                  <div class="chatting p-2 rounded-4 bg-light d-inline-block">
+                    <div class="says">
+                      <%= m.message %>
+                    </div>
                   </div>
                 </div>
               </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="border border-info  rounded-bottom-4 chat-form-box p-3 align-bottom">
+          <%= form_with model: @message do |f| %>
+            <div class="chat-form-group d-flex">
+              <%= f.text_field :message, class: "form-control mr-2 flex-grow-1 rounded-4" %>
+              <%= f.number_field :room_id, value: @room.id, hidden: true %>
+              <%= f.submit "送信", class: "btn btn-outline-secondary message_submit rounded-4" %>
             </div>
           <% end %>
-        <% end %>
-      </div>
-      <div class="chat-form-box p-3 border-top align-bottom">
-        <%= form_with model: @message do |f| %>
-          <div class="chat-form-group d-flex">
-            <%= f.text_field :message, class: "form-control mr-2 flex-grow-1 rounded-4" %>
-            <%= f.number_field :room_id, value: @room.id, hidden: true %>
-            <%= f.submit "送信", class: "btn btn-light message_submit rounded-4" %>
-          </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
