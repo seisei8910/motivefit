@@ -17,7 +17,9 @@
               <th scope="row"><%= link_to user.id, admin_user_path(user.id), class: "text-dark" %></th>
               <td><%= link_to user.name, admin_user_path(user.id), class: "text-dark" %></td>
               <td><%= link_to user.email, admin_user_path(user.id), class: "text-dark" %></td>
-              <td><%= link_to '削除', admin_user_path(user), class: "btn btn-outline-danger btn-block", method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+              <% if user.email != "guest@example.com" %>
+                <td><%= link_to '削除', admin_user_path(user), class: "btn btn-outline-danger btn-block", method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
