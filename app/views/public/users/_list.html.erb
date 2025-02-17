@@ -12,11 +12,25 @@
               <div class="d-flex align-items-center justify-content-center gap-3 pb-2">
                 <%= render "public/relationships/count", user: user %>
               </div>
-              <div class="d-flex align-items-center justify-content-center">
+              <div class="d-flex align-items-center justify-content-center gap-3">
                 <% if user != current_user %>
                   <div id="relationships_buttons_<%= user.id %>">
                     <%= render "public/relationships/btn", user: user %>
                   </div>
+                  <% if (current_user.following? user) && (user.following? current_user)  %>
+                    <% if @is_room == true %>
+                      <%= link_to room_path(@room_id), class: "btn btn-sm btn-outline-primary rounded-4" do %>
+                        <i class="fas fa-user-cog"></i>チャットへ
+                      <% end %>
+                    <% else %>
+                      <%= form_with model: @room, local: true do |f| %>
+                        <%= fields_for @participant do |e| %>
+                          <%= e.hidden_field :user_id, value: user.id %>
+                        <% end %>
+                        <%= f.submit "チャットを始める", class:"btn btn-sm btn-primary rounded-4"%>
+                      <% end %>
+                    <% end %>
+                  <% end %>
                 <% end %>
               </div>
             </div>
