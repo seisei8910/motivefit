@@ -71,3 +71,5 @@ gem "net-imap"
 gem 'jquery-rails'
 
 gem 'simple_calendar'
+
+gem "aws-sdk-s3", require: false
