@@ -40,6 +40,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
+      sleep(3)
       flash[:notice] = "投稿を更新しました！新しい内容でモチベーションアップ 💪🔥"
       redirect_to post_path(@post.id)
     else
