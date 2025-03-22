@@ -27,8 +27,9 @@
           <% @messages.each do |m| %>
             <% if m.user_id == current_user.id %>
               <div class="d-flex justify-content-end mb-3">
-                <div class="mycomment p-2 rounded-4 d-inline-block">
-                  <%= m.message %>
+                <div class="d-inline-block">
+                  <p class="mycomment rounded-4 p-2 mb-0"><%= m.message %></p>
+                  <div class="text-end text-secondary fs-6-50"><%= m.created_at.strftime("%Y/%m/%d %-H:%M") %></div>
                 </div>
               </div>
             <% else %>
@@ -37,10 +38,9 @@
                   <div class="faceicon">
                     <%= image_tag m.user.get_profile_image(30,30), class: "message_icon_img mr-2" %>
                   </div>
-                  <div class="chatting p-2 rounded-4 bg-light d-inline-block">
-                    <div class="says">
-                      <%= m.message %>
-                    </div>
+                  <div class="d-inline-block">
+                    <p class="chatting bg-light rounded-4 p-2 mb-0"><%= m.message %></p>
+                    <div class="text-start text-secondary fs-6-50"><%= m.created_at.strftime("%Y/%m/%d %-H:%M") %></div>
                   </div>
                 </div>
               </div>
