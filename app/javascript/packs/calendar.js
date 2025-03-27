@@ -25,6 +25,7 @@ document.addEventListener("turbolinks:load", function () {
           li.className = "list-group-item d-flex justify-content-between align-items-center";
 
           var startTime = new Date(event.start_time);
+          startTime.setUTCHours(startTime.getUTCHours() + 9);
 
           var japanHours = startTime.getHours();
           var ampm = (japanHours >= 12) ? '午後' : '午前';
