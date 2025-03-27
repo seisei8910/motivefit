@@ -28,12 +28,12 @@ document.addEventListener("turbolinks:load", function () {
           var li = document.createElement("li");
           li.className = "list-group-item d-flex justify-content-between align-items-center";
 
-          var startTime = new Date(event.start_time);
-
-          var japanHours = startTime.getHours();
-          var japanMinutes = startTime.getMinutes().toString().padStart(2, '0');
-
-          var formattedTime = `${japanHours}:${japanMinutes}`;
+          var formattedTime = new Date(event.start_time).toLocaleTimeString('ja-JP', {
+            timeZone: 'Asia/Tokyo',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          });
 
           // 左側に時刻とタイトル
           var leftContent = `
