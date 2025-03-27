@@ -12,11 +12,7 @@ document.addEventListener("turbolinks:load", function () {
       var date = button.getAttribute("data-date");
       var events = JSON.parse(button.getAttribute("data-events"));
 
-      var formattedDate = new Date(date).toLocaleDateString('ja-JP', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
+      var formattedDate = new Date(date).toLocaleDateString({ timeZone: 'Asia/Tokyo' });
 
       document.getElementById("modalDate").textContent = formattedDate;
 
