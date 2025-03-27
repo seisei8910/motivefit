@@ -12,7 +12,11 @@ document.addEventListener("turbolinks:load", function () {
       var date = button.getAttribute("data-date");
       var events = JSON.parse(button.getAttribute("data-events"));
 
-      var formattedDate = new Date(date).toLocaleDateString({ timeZone: 'Asia/Tokyo' });
+      var formattedDate = new Date(date).toLocaleDateString('ja-JP', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
 
       document.getElementById("modalDate").textContent = formattedDate;
 
@@ -25,14 +29,11 @@ document.addEventListener("turbolinks:load", function () {
           li.className = "list-group-item d-flex justify-content-between align-items-center";
 
           var startTime = new Date(event.start_time);
-          startTime.setUTCHours(startTime.getUTCHours() + 9);
 
           var japanHours = startTime.getHours();
-          var ampm = (japanHours >= 12) ? '午後' : '午前';
-          japanHours = japanHours % 12 || 12;
           var japanMinutes = startTime.getMinutes().toString().padStart(2, '0');
 
-          var formattedTime = `${ampm} ${japanHours}:${japanMinutes}`;
+          var formattedTime = `${japanHours}:${japanMinutes}`;
 
           // 左側に時刻とタイトル
           var leftContent = `
