@@ -40,7 +40,14 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  validates :name, presence: true, length: { maximum: 50 }, format: { with: /\A[^\d`!@#$%\^&*+_=]+\z/, message: "に不正な文字が含まれています" }
+  validates :name,
+    presence: true, length: { maximum: 50 },
+    format: { with: /\A[^\d`!@#$%\^&*+_=]+\z/,
+    message: "に不正な文字が含まれています" }
+  validates :email,
+    format: { with: Devise.email_regexp },
+    presence: true,
+    uniqueness: { case_insensitive: true }
 
   def self.search_for(word, method)
     if method == 'perfect_match'
