@@ -48,4 +48,15 @@ describe 'ユーザーログイン前のテスト' do
       end
     end
   end
+
+  describe 'ヘッダーのテスト: ログインしていない場合' do
+    before do
+      visit root_path
+    end
+    context '表示内容の確認' do
+      it 'ロゴリンクが表示される' do
+        expect(page).to have_selector('a.navbar-brand[href="/"]')
+      end
+    end
+  end
 end
