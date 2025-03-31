@@ -74,5 +74,38 @@ describe 'ユーザーログイン前のテスト' do
         expect(login_link).to match(/Log in/)
       end
     end
+    context 'リンクの内容を確認' do
+      subject {current_path}
+      it 'ロゴを押すと、トップ画面に遷移する' do
+        home_link = find_all('a')[0]
+        home_link.click
+        is_expected.to eq '/'
+      end
+      it 'ホームを押すと、トップ画面に遷移する' do
+        home_link = find_all('a')[1].text
+        home_link = home_link.delete(' ')
+        home_link.gsub!(/\n/, '')
+        click_link home_link
+        is_expected.to eq '/'
+      end
+      it 'このサイトについてを押すと、アバウト画面に遷移する' do
+        about_link = find_all('a')[2].text
+        about_link = about_link.gsub(/\n/, '').strip
+        click_link about_link
+        is_expected.to eq '/about'
+      end
+      it 'Sign upを押すと、新規登録画面に遷移する' do
+        signup_link = find_all('a')[3].text
+        signup_link = signup_link.gsub(/\n/, '').strip
+        click_link signup_link, match: :first
+        is_expected.to eq '/users/sign_up'
+      end
+      it 'Log inを押すと、ログイン画面に遷移する' do
+        login_link = find_all('a')[4].text
+        login_link = login_link.gsub(/\n/, '').strip
+        click_link login_link, match: :first
+        is_expected.to eq '/users/sign_in'
+      end
+    end
   end
 end
