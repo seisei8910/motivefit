@@ -200,4 +200,42 @@ describe 'ユーザーログイン前のテスト' do
       end
     end
   end
+
+  describe 'ヘッダーのテスト: ログインしている場合' do
+    let(:user) { create(:user) }
+    before do
+      visit new_user_session_path
+      fill_in 'user[email]', with: user.email
+      fill_in 'user[password]', with: user.password
+      click_button 'ログイン'
+    end
+    context 'ヘッダーの表示を確認' do
+      it 'ロゴリンクが表示される' do
+        expect(page).to have_selector('a.navbar-brand[href="/"]')
+      end
+      it '投稿一覧リンクが表示される' do
+        posts_link = find_all('a')[1].text
+        expect(posts_link).to match(/投稿一覧/)
+      end
+      it 'マイページリンクが表示される' do
+        mypage_link = find_all('a')[2].text
+        expect(mypage_link).to match(/マイページ/)
+      end
+      it '通知ボタンが表示される' do
+        expect(page).to have_button('通知')
+      end
+      it 'メッセージリンクが表示される' do
+        message_link = find_all('a')[3].text
+        expect(message_link).to match(/メッセージ/)
+      end
+      it '新規投稿リンクが表示される' do
+        posts_new_link = find_all('a')[4].text
+        expect(posts_new_link).to match(/新規投稿/)
+      end
+      it 'Log outリンクが表示される' do
+        logout_link = find_all('a')[5].text
+        expect(logout_link).to match(/Log out/)
+      end
+    end
+  end
 end
