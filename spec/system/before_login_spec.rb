@@ -108,4 +108,49 @@ describe 'ユーザーログイン前のテスト' do
       end
     end
   end
+
+  describe 'ユーザ新規登録のテスト' do
+    before do
+      visit new_user_registration_path
+    end
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/users/sign_up'
+      end
+      it '「アカウントを作成」と表示される' do
+        expect(page).to have_content 'アカウントを作成'
+      end
+      it 'nameフォームが表示される' do
+        expect(page).to have_field 'user[name]'
+      end
+      it 'emailフォームが表示される' do
+        expect(page).to have_field 'user[email]'
+      end
+      it 'passwordフォームが表示される' do
+        expect(page).to have_field 'user[password]'
+      end
+      it 'password_confirmationフォームが表示される' do
+        expect(page).to have_field 'user[password_confirmation]'
+      end
+      it 'サインアップボタンが表示される' do
+        expect(page).to have_button 'サインアップ'
+      end
+    end
+    context '新規登録成功のテスト' do
+      before do
+        password = Faker::Internet.password(min_length: 6)
+        fill_in 'user[name]', with: Faker::Name.name
+        fill_in 'user[email]', with: Faker::Internet.email
+        fill_in 'user[password]', with: password
+        fill_in 'user[password_confirmation]', with: password
+      end
+      it '正しく新規登録される' do
+        expect { click_button 'サインアップ' }.to change(User.all, :count).by(1)
+      end
+      it '新規登録後のリダイレクト先が、新規登録できたユーザのマイページになっている' do
+        click_button 'サインアップ'
+        expect(current_path).to eq '/mypage'
+      end
+    end
+  end
 end
