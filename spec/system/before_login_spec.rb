@@ -238,4 +238,27 @@ describe 'ユーザーログイン前のテスト' do
       end
     end
   end
+
+  describe 'ユーザログアウトのテスト' do
+    let(:user) { create(:user) }
+
+    before do
+      visit new_user_session_path
+      fill_in 'user[email]', with: user.email
+      fill_in 'user[password]', with: user.password
+      click_button 'ログイン'
+      logout_link = find_all('a')[5].text
+      logout_link = logout_link.gsub(/\n/, '').strip
+      click_link logout_link
+    end
+
+    context 'ログアウト機能のテスト' do
+      it '正しくログアウトできている: ログアウト後のリダイレクト先においてAbout画面へのリンクが存在する' do
+        expect(page).to have_link '', href: '/about'
+      end
+      it 'ログアウト後のリダイレクト先が、About画面になっている' do
+        expect(current_path).to eq '/about'
+      end
+    end
+  end
 end
