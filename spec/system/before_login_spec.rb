@@ -225,8 +225,8 @@ describe 'ユーザーログイン前のテスト' do
         expect(page).to have_button('通知')
       end
       it 'メッセージリンクが表示される' do
-        message_link = find_all('a')[3].text
-        expect(message_link).to match(/メッセージ/)
+        rooms_link = find_all('a')[3].text
+        expect(rooms_link).to match(/メッセージ/)
       end
       it '新規投稿リンクが表示される' do
         posts_new_link = find_all('a')[4].text
