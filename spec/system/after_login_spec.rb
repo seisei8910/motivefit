@@ -43,4 +43,57 @@ describe 'ユーザログイン後のテスト' do
       end
     end
   end
+
+  describe '投稿一覧画面のテスト' do
+    before do
+      visit posts_path
+    end
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts'
+      end
+      it '自分と他人の投稿のアイコン画像のリンク先が正しい' do
+        expect(page).to have_link '', href: user_path(post.user)
+        expect(page).to have_link '', href: user_path(other_post.user)
+      end
+      it '自分と他人の投稿の名前のリンク先が正しい' do
+        expect(page).to have_link post.user.name, href: user_path(post.user)
+        expect(page).to have_link other_post.user.name, href: user_path(other_post.user)
+      end
+      it '自分と他人の投稿の日付のリンク先が正しい' do
+        expect(page).to have_link post.start_time.strftime("%Y年%m月%d日"), href: post_path(post)
+        expect(page).to have_link other_post.start_time.strftime("%Y年%m月%d日"), href: post_path(other_post)
+      end
+      it '自分と他人の投稿のタイトルのリンク先が正しい' do
+        expect(page).to have_link post.title, href: post_path(post)
+        expect(page).to have_link other_post.title, href: post_path(other_post)
+      end
+      it '自分と他人の投稿のメニューのリンク先が正しい' do
+        expect(page).to have_link post.menu, href: post_path(post)
+        expect(page).to have_link other_post.menu, href: post_path(other_post)
+      end
+      it '自分と他人の投稿の感想・メモのリンク先が正しい' do
+        expect(page).to have_link post.body, href: post_path(post)
+        expect(page).to have_link other_post.body, href: post_path(other_post)
+      end
+    end
+    context 'タブ表示内容の確認' do
+      it '投稿一覧リンクが表示される' do
+        expect(page).to have_link '投稿一覧'
+      end
+      it 'フォロー中リンクが表示される' do
+        expect(page).to have_link 'フォロー中'
+      end
+      it 'いいねリンクが表示される' do
+        expect(page).to have_link 'いいね'
+      end
+    end
+    context 'タブのリンク内容を確認' do
+      subject { current_path }
+      it '投稿一覧タブを押すと、投稿一覧に遷移する' do
+        find_all('a', text: '投稿一覧')[1].click
+        is_expected.to eq '/posts'
+      end
+    end
+  end
 end
