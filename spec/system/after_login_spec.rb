@@ -117,4 +117,15 @@ describe 'ユーザログイン後のテスト' do
       end
     end
   end
+
+  describe '新規投稿画面のテスト' do
+    before do
+      visit new_post_path
+    end
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/new'
+      end
+    end
+  end
 end
