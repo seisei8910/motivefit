@@ -126,6 +126,15 @@ describe 'ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/posts/new'
       end
+      it '「投稿フォーム」と表示される' do
+        expect(page).to have_content '投稿フォーム'
+      end
+      it 'フィットネスを行なった日フォームが表示される' do
+        expect(page).to have_field 'post[start_time]'
+      end
+      it 'フィットネスを行なった日フォームに値が入っていない' do
+        expect(find_field('post[start_time]').value).to be_blank
+      end
     end
   end
 end
