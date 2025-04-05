@@ -79,13 +79,13 @@ describe 'ユーザログイン後のテスト' do
     end
     context 'タブ表示内容の確認' do
       it '投稿一覧リンクが表示される' do
-        expect(page).to have_link '投稿一覧'
+        expect(page).to have_link '投稿一覧', href: posts_path
       end
       it 'フォロー中リンクが表示される' do
-        expect(page).to have_link 'フォロー中'
+        expect(page).to have_link 'フォロー中', href: follow_feed_path
       end
       it 'いいねリンクが表示される' do
-        expect(page).to have_link 'いいね'
+        expect(page).to have_link 'いいね', href: favorite_posts_user_path(user)
       end
     end
     context 'タブのリンク内容を確認' do
@@ -101,6 +101,19 @@ describe 'ユーザログイン後のテスト' do
       it 'いいねタブを押すと、投稿一覧に遷移する' do
         click_link 'いいね'
         is_expected.to eq '/users/' + user.id.to_s + '/favorite_posts'
+      end
+    end
+    context 'サイドバーの確認' do
+      it '自分の名前と紹介文が表示される' do
+        expect(page).to have_content user.name
+        expect(page).to have_content user.status_message
+      end
+      it 'フォローリンク、フォロワーリンクが表示される' do
+        expect(page).to have_link 'フォロー', href: user_followings_path(user)
+        expect(page).to have_link 'フォロワー', href: user_followers_path(user)
+      end
+      it '自分のユーザー編集画面へのリンクが存在する' do
+        expect(page).to have_link 'プロフィール編集', href: edit_user_path(user)
       end
     end
   end
