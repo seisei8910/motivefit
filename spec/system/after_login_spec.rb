@@ -94,6 +94,14 @@ describe 'ユーザログイン後のテスト' do
         find_all('a', text: '投稿一覧')[1].click
         is_expected.to eq '/posts'
       end
+      it 'フォロー中タブを押すと、投稿一覧に遷移する' do
+        click_link 'フォロー中'
+        is_expected.to eq '/follow_feed'
+      end
+      it 'いいねタブを押すと、投稿一覧に遷移する' do
+        click_link 'いいね'
+        is_expected.to eq '/users/' + user.id.to_s + '/favorite_posts'
+      end
     end
   end
 end
