@@ -227,5 +227,27 @@ describe 'ユーザログイン後のテスト' do
         expect(current_path).to eq edit_post_path(second_user_post)
       end
     end
+    context '削除リンクのテスト' do
+      it 'application.html.erbにjavascript_pack_tagを含んでいる' do
+        is_exist = 0
+        open("app/views/layouts/application.html.erb").each do |line|
+          strip_line = line.chomp.gsub(" ", "")
+          if strip_line.include?("<%=javascript_pack_tag'application','data-turbolinks-track':'reload'%>")
+            is_exist = 1
+            break
+          end
+        end
+        expect(is_exist).to eq(1)
+      end
+      before do
+        click_link '削除'
+      end
+      it '正しく削除される' do
+        expect(Post.where(id: post.id).count).to eq 0
+      end
+      it 'リダイレクト先が、投稿一覧画面になっている' do
+        expect(current_path).to eq '/posts'
+      end
+    end
   end
 end
