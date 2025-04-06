@@ -135,6 +135,12 @@ describe 'ユーザログイン後のテスト' do
       it 'フィットネスを行なった日フォームに値が入っていない' do
         expect(find_field('post[start_time]').value).to be_blank
       end
+      it 'タイトルフォームが表示される' do
+        expect(page).to have_field 'post[title]'
+      end
+      it 'タイトルフォームに値が入っていない' do
+        expect(find_field('post[title]').value).to be_blank
+      end
     end
   end
 end
