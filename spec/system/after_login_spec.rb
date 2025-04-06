@@ -52,6 +52,9 @@ describe 'ユーザログイン後のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/posts'
       end
+      it '自分と他人のアイコン画像と投稿画像が表示される: fallbackの画像がサイドバーの1つ+一覧(アイコン)の2つ+一覧(投稿)の2つの計5つ存在する' do
+        expect(all('img').size).to eq(5)
+      end
       it '自分と他人の投稿のアイコン画像のリンク先が正しい' do
         expect(page).to have_link '', href: user_path(post.user)
         expect(page).to have_link '', href: user_path(other_post.user)
