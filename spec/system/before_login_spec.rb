@@ -11,11 +11,11 @@ describe 'ユーザーログイン前のテスト' do
       it 'URLが正しい' do
         expect(current_path).to eq '/'
       end
-      it 'ゲストログイン（閲覧用）リンクが表示される' do
+      it '「ゲストログイン（閲覧用）」リンクが表示される' do
         guest_log_in_link = find_all('a')[5].text
         expect(guest_log_in_link).to match(/ゲストログイン（閲覧用）/)
       end
-      it 'ゲストログイン（閲覧用）リンクの内容が正しい' do
+      it '「ゲストログイン（閲覧用）」リンクの内容が正しい' do
         guest_log_in_link = find_all('a')[5].text
         expect(page).to have_link guest_log_in_link, href: users_guest_sign_in_path
       end
@@ -54,10 +54,10 @@ describe 'ユーザーログイン前のテスト' do
       visit root_path
     end
     context '表示内容の確認' do
-      it 'ロゴリンクが表示される' do
+      it '「ロゴ」リンクが表示される' do
         expect(page).to have_selector('a.navbar-brand[href="/"]')
       end
-      it 'ホームリンクが表示される: 左上から2番目のリンクが「ホーム」である' do
+      it '「ホーム」リンクが表示される: 左上から2番目のリンクが「ホーム」である' do
         home_link = find_all('a')[1].text
         expect(home_link).to match(/ホーム/)
       end
@@ -76,19 +76,19 @@ describe 'ユーザーログイン前のテスト' do
     end
     context 'リンクの内容を確認' do
       subject {current_path}
-      it 'ロゴを押すと、トップ画面に遷移する' do
+      it '「ロゴ」を押すと、トップ画面に遷移する' do
         home_link = find_all('a')[0]
         home_link.click
         is_expected.to eq '/'
       end
-      it 'ホームを押すと、トップ画面に遷移する' do
+      it '「ホーム」を押すと、トップ画面に遷移する' do
         home_link = find_all('a')[1].text
         home_link = home_link.delete(' ')
         home_link.gsub!(/\n/, '')
         click_link home_link
         is_expected.to eq '/'
       end
-      it 'このサイトについてを押すと、アバウト画面に遷移する' do
+      it '「このサイトについて」を押すと、アバウト画面に遷移する' do
         about_link = find_all('a')[2].text
         about_link = about_link.gsub(/\n/, '').strip
         click_link about_link
@@ -132,7 +132,7 @@ describe 'ユーザーログイン前のテスト' do
       it 'password_confirmationフォームが表示される' do
         expect(page).to have_field 'user[password_confirmation]'
       end
-      it 'サインアップボタンが表示される' do
+      it '「サインアップ」ボタンが表示される' do
         expect(page).to have_button 'サインアップ'
       end
     end
@@ -172,7 +172,7 @@ describe 'ユーザーログイン前のテスト' do
       it 'passwordフォームが表示される' do
         expect(page).to have_field 'user[password]'
       end
-      it 'ログインボタンが表示される' do
+      it '「ログイン」ボタンが表示される' do
         expect(page).to have_button 'ログイン'
       end
       it 'nameフォームは表示されない' do
@@ -210,25 +210,25 @@ describe 'ユーザーログイン前のテスト' do
       click_button 'ログイン'
     end
     context 'ヘッダーの表示を確認' do
-      it 'ロゴリンクが表示される' do
+      it '「ロゴ」リンクが表示される' do
         expect(page).to have_selector('a.navbar-brand[href="/"]')
       end
-      it '投稿一覧リンクが表示される' do
+      it '「投稿一覧」リンクが表示される' do
         posts_link = find_all('a')[1].text
         expect(posts_link).to match(/投稿一覧/)
       end
-      it 'マイページリンクが表示される' do
+      it '「マイページ」リンクが表示される' do
         mypage_link = find_all('a')[2].text
         expect(mypage_link).to match(/マイページ/)
       end
-      it '通知ボタンが表示される' do
+      it '「通知」ボタンが表示される' do
         expect(page).to have_button('通知')
       end
-      it 'メッセージリンクが表示される' do
+      it '「メッセージ」リンクが表示される' do
         rooms_link = find_all('a')[3].text
         expect(rooms_link).to match(/メッセージ/)
       end
-      it '新規投稿リンクが表示される' do
+      it '「新規投稿」リンクが表示される' do
         posts_new_link = find_all('a')[4].text
         expect(posts_new_link).to match(/新規投稿/)
       end
