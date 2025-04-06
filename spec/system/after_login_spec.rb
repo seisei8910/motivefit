@@ -311,4 +311,15 @@ describe 'ユーザログイン後のテスト' do
       end
     end
   end
+
+  describe '自分のユーザ詳細画面のテスト' do
+    before do
+      visit user_path(user)
+    end
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/users/' + user.id.to_s
+      end
+    end
+  end
 end
