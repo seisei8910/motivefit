@@ -166,5 +166,20 @@ describe 'ユーザログイン後のテスト' do
         expect(page).to have_button '投稿'
       end
     end
+    context '投稿成功のテスト' do
+      before do
+        fill_in 'post[start_time]', with: DateTime.now
+        fill_in 'post[title]', with: Faker::Lorem.characters(number:5)
+        fill_in 'post[menu]', with: Faker::Lorem.characters(number:10)
+        fill_in 'post[body]', with: Faker::Lorem.characters(number:20)
+      end
+      it '自分の新しい投稿が正しく保存される' do
+        expect { click_button '投稿' }.to change(user.posts, :count).by(1)
+      end
+      it 'リダイレクト先が、保存できた投稿の詳細画面になっている' do
+        click_button '投稿'
+        expect(current_path).to eq '/posts/' + Post.last.id.to_s
+      end
+    end
   end
 end
