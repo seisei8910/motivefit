@@ -281,5 +281,34 @@ describe 'ユーザログイン後のテスト' do
         expect(page).to have_button '保存'
       end
     end
+    context '編集成功のテスト' do
+      before do
+        @post_old_start_time = post.start_time
+        @post_old_title = post.title
+        @post_old_menu = post.menu
+        @post_old_body = post.body
+        fill_in 'post[start_time]', with: DateTime.now
+        fill_in 'post[title]', with: Faker::Lorem.characters(number:4)
+        fill_in 'post[menu]', with: Faker::Lorem.characters(number:12)
+        fill_in 'post[body]', with: Faker::Lorem.characters(number:19)
+        click_button '保存'
+      end
+      it '「フィットネスを行なった日」が正しく更新される' do
+        expect(post.reload.start_time).not_to eq @post_old_start_time
+      end
+      it '「タイトル」が正しく更新される' do
+        expect(post.reload.title).not_to eq @post_old_title
+      end
+      it '「メニュー」が正しく更新される' do
+        expect(post.reload.menu).not_to eq @post_old_menu
+      end
+      it '「感想・メモ」が正しく更新される' do
+        expect(post.reload.body).not_to eq @post_old_body
+      end
+      it 'リダイレクト先が、更新した投稿の詳細画面になっている' do
+        expect(current_path).to eq '/posts/' + post.id.to_s
+        expect(page).to have_content '投稿詳細'
+      end
+    end
   end
 end
