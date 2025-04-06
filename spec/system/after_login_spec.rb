@@ -182,4 +182,39 @@ describe 'ユーザログイン後のテスト' do
       end
     end
   end
+
+  describe '自分の投稿詳細画面のテスト' do
+    before do
+      visit post_path(post)
+    end
+    context '表示内容の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/' + post.id.to_s
+      end
+      it '「投稿詳細」と表示される' do
+        expect(page).to have_content '投稿詳細'
+      end
+      it 'ユーザ画像・名前のリンク先が正しい' do
+        expect(page).to have_link post.user.name, href: user_path(post.user)
+      end
+      it '投稿のフィットネスを行なった「日時」が表示される' do
+        expect(page).to have_content post.start_time.strftime("%Y年%m月%d日")
+      end
+      it '投稿の「タイトル」が表示される' do
+        expect(page).to have_content post.title
+      end
+      it '投稿の「メニュー」が表示される' do
+        expect(page).to have_content post.menu
+      end
+      it '投稿の「感想・メモ」が表示される' do
+        expect(page).to have_content post.body
+      end
+      it '投稿の「編集」リンクが表示される' do
+        expect(page).to have_link '編集', href: edit_post_path(post)
+      end
+      it '投稿の「削除」リンクが表示される' do
+        expect(page).to have_link '削除', href: post_path(post)
+      end
+    end
+  end
 end
