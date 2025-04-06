@@ -216,5 +216,16 @@ describe 'ユーザログイン後のテスト' do
         expect(page).to have_link '削除', href: post_path(post)
       end
     end
+    # === ユーザーが投稿者である場合に編集画面に遷移する ===
+    # postsController > editのロジックが破綻していないかの妥当性を兼ねる
+    # ==========================================================
+    context '編集リンクのテスト' do
+      it '編集画面に遷移する' do
+        second_user_post = FactoryBot.create(:post, user: user) # 「user」の投稿をもう一つ作成
+        visit post_path(second_user_post)
+        click_link '編集'
+        expect(current_path).to eq edit_post_path(second_user_post)
+      end
+    end
   end
 end
