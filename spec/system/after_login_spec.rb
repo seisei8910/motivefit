@@ -250,4 +250,36 @@ describe 'ユーザログイン後のテスト' do
       end
     end
   end
+
+  describe '自分の投稿編集画面のテスト' do
+    before do
+      visit edit_post_path(post)
+    end
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/posts/' + post.id.to_s + '/edit'
+      end
+      it '「編集フォーム」と表示される' do
+        expect(page).to have_content '編集フォーム'
+      end
+      it '「フィットネスを行なった日」フォームが表示される' do
+        expect(page).to have_field 'post[start_time]'
+      end
+      it '「タイトル」フォームが表示される' do
+        expect(page).to have_field 'post[title]'
+      end
+      it '「メニュー」フォームが表示される' do
+        expect(page).to have_field 'post[menu]'
+      end
+      it '「感想・メモ」フォームが表示される' do
+        expect(page).to have_field 'post[body]'
+      end
+      it '「画像(任意)」フォームが表示される' do
+        expect(page).to have_field 'post[image]'
+      end
+      it '「保存」ボタンが表示される' do
+        expect(page).to have_button '保存'
+      end
+    end
+  end
 end
