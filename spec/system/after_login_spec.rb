@@ -326,6 +326,28 @@ describe 'ユーザログイン後のテスト' do
       it '投稿一覧のユーザ画像のリンク先が正しい' do
         expect(page).to have_link '', href: user_path(post.user)
       end
+      it '投稿一覧の投稿に自分の「名前」が表示され、リンクが正しい' do
+        expect(page).to have_link post.user.name, href: user_path(post.user)
+      end
+      it '投稿一覧に自分の投稿の「日付」が表示され、リンクが正しい' do
+        expect(page).to have_link post.start_time.strftime("%Y年%m月%d日"), href: post_path(post)
+      end
+      it '投稿一覧に自分の投稿の「タイトル」が表示され、リンクが正しい' do
+        expect(page).to have_link post.title, href: post_path(post)
+      end
+      it '投稿一覧に自分の投稿の「メニュー」が表示され、リンクが正しい' do
+        expect(page).to have_link post.menu, href: post_path(post)
+      end
+      it '投稿一覧に自分の投稿の「感想・メモ」が表示され、リンクが正しい' do
+        expect(page).to have_link post.body, href: post_path(post)
+      end
+      it '他人の投稿は表示されない' do
+        expect(page).not_to have_link '', href: user_path(other_user)
+        expect(page).not_to have_content other_post.user.name
+        expect(page).not_to have_content other_post.title
+        expect(page).not_to have_content other_post.menu
+        expect(page).not_to have_content other_post.body
+      end
     end
   end
 end
