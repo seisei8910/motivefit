@@ -411,5 +411,16 @@ describe 'ユーザログイン後のテスト' do
         expect(current_path).to eq '/users/' + user.id.to_s
       end
     end
+    context '退会リンクのテスト' do
+      before do
+        click_link '退会'
+      end
+      it '正しく削除される' do
+        expect(User.where(id: user.id).count).to eq 0
+      end
+      it 'リダイレクト先が、投稿一覧画面になっている' do
+        expect(current_path).to eq '/users/sign_up'
+      end
+    end
   end
 end
