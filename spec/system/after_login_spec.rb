@@ -363,4 +363,33 @@ describe 'ユーザログイン後のテスト' do
       end
     end
   end
+
+  describe '自分のユーザ情報編集画面のテスト' do
+    before do
+      visit edit_user_path(user)
+    end
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
+      end
+      it '「プロフィール編集フォーム」と表示される' do
+        expect(page).to have_content 'プロフィール編集フォーム'
+      end
+      it '「名前」フォームに自分の名前が表示される' do
+        expect(page).to have_field 'user[name]', with: user.name
+      end
+      it '「プロフィール画像(任意)」フォームが表示される' do
+        expect(page).to have_field 'user[profile_image]'
+      end
+      it '「ひとこと(任意)」フォームに自分のひとことが表示される' do
+        expect(page).to have_field 'user[status_message]', with: user.status_message
+      end
+      it '「変更を保存」ボタンが表示される' do
+        expect(page).to have_button '変更を保存'
+      end
+      it '「退会」リンクが表示される' do
+        expect(page).to have_link '退会'
+      end
+    end
+  end
 end
