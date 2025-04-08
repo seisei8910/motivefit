@@ -391,5 +391,25 @@ describe 'ユーザログイン後のテスト' do
         expect(page).to have_link '退会'
       end
     end
+    context '更新成功のテスト' do
+      before do
+        @user_old_name = user.name
+        @user_old_status_message = user.status_message
+        fill_in 'user[name]', with: Faker::Name.name
+        fill_in 'user[status_message]', with: Faker::Lorem.characters(number: 19)
+        expect(user.profile_image).to be_attached
+        click_button '変更を保存'
+        save_page
+      end
+      it 'nameが正しく更新される' do
+        expect(user.reload.name).not_to eq @user_old_name
+      end
+      it 'status_messageが正しく更新される' do
+        expect(user.reload.status_message).not_to eq @user_old_status_message
+      end
+      it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
+        expect(current_path).to eq '/users/' + user.id.to_s
+      end
+    end
   end
 end
