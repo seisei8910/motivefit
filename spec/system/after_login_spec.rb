@@ -349,5 +349,18 @@ describe 'ユーザログイン後のテスト' do
         expect(page).not_to have_content other_post.body
       end
     end
+    context 'サイドバーの確認' do
+      it '自分の名前と紹介文が表示される' do
+        expect(page).to have_content user.name
+        expect(page).to have_content user.status_message
+      end
+      it '「フォロー」リンク、「フォロワー」リンクが表示される' do
+        expect(page).to have_link 'フォロー', href: user_followings_path(user)
+        expect(page).to have_link 'フォロワー', href: user_followers_path(user)
+      end
+      it '自分のユーザー編集画面へのリンクが存在する' do
+        expect(page).to have_link 'プロフィール編集', href: edit_user_path(user)
+      end
+    end
   end
 end
