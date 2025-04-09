@@ -349,5 +349,78 @@ describe 'ユーザログイン後のテスト' do
         expect(page).not_to have_content other_post.body
       end
     end
+    context 'サイドバーの確認' do
+      it '自分の名前と紹介文が表示される' do
+        expect(page).to have_content user.name
+        expect(page).to have_content user.status_message
+      end
+      it '「フォロー」リンク、「フォロワー」リンクが表示される' do
+        expect(page).to have_link 'フォロー', href: user_followings_path(user)
+        expect(page).to have_link 'フォロワー', href: user_followers_path(user)
+      end
+      it '自分のユーザー編集画面へのリンクが存在する' do
+        expect(page).to have_link 'プロフィール編集', href: edit_user_path(user)
+      end
+    end
+  end
+
+  describe '自分のユーザ情報編集画面のテスト' do
+    before do
+      visit edit_user_path(user)
+    end
+    context '表示の確認' do
+      it 'URLが正しい' do
+        expect(current_path).to eq '/users/' + user.id.to_s + '/edit'
+      end
+      it '「プロフィール編集フォーム」と表示される' do
+        expect(page).to have_content 'プロフィール編集フォーム'
+      end
+      it '「名前」フォームに自分の名前が表示される' do
+        expect(page).to have_field 'user[name]', with: user.name
+      end
+      it '「プロフィール画像(任意)」フォームが表示される' do
+        expect(page).to have_field 'user[profile_image]'
+      end
+      it '「ひとこと(任意)」フォームに自分のひとことが表示される' do
+        expect(page).to have_field 'user[status_message]', with: user.status_message
+      end
+      it '「変更を保存」ボタンが表示される' do
+        expect(page).to have_button '変更を保存'
+      end
+      it '「退会」リンクが表示される' do
+        expect(page).to have_link '退会'
+      end
+    end
+    context '更新成功のテスト' do
+      before do
+        @user_old_name = user.name
+        @user_old_status_message = user.status_message
+        fill_in 'user[name]', with: Faker::Name.name
+        fill_in 'user[status_message]', with: Faker::Lorem.characters(number: 19)
+        expect(user.profile_image).to be_attached
+        click_button '変更を保存'
+        save_page
+      end
+      it 'nameが正しく更新される' do
+        expect(user.reload.name).not_to eq @user_old_name
+      end
+      it 'status_messageが正しく更新される' do
+        expect(user.reload.status_message).not_to eq @user_old_status_message
+      end
+      it 'リダイレクト先が、自分のユーザ詳細画面になっている' do
+        expect(current_path).to eq '/users/' + user.id.to_s
+      end
+    end
+    context '退会リンクのテスト' do
+      before do
+        click_link '退会'
+      end
+      it '正しく削除される' do
+        expect(User.where(id: user.id).count).to eq 0
+      end
+      it 'リダイレクト先が、投稿一覧画面になっている' do
+        expect(current_path).to eq '/users/sign_up'
+      end
+    end
   end
 end
