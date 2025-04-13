@@ -33,10 +33,15 @@ https://motivefit.net/
 ​
 ## 開発環境
 - OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
-- フレームワーク：Ruby on Rails
+- 使用エディタ：Visual Studio Code
+- 接続方法：VSCode Remote SSH 拡張機能を使用して、ローカルPCからEC2インスタンスへSSH接続​
+- 言語：HTML,CSS,JavaScript,Ruby 3.1.2,SQL
+- フレームワーク：Ruby on Rails 6.1.7.10
 - JSライブラリ：jQuery
-- IDE：Cloud9
+- バージョン管理：Git（GitHub）
+- CI/CD：GitHub Actions
+- テストツール：RSpec​
+- コード品質チェック：Rubocop​
 ​
 ## 使用素材
 - canva
