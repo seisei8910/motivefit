@@ -29,7 +29,7 @@ https://motivefit.net/
 ### AWS構成図
 ![Image](https://github.com/user-attachments/assets/12557b39-cbc0-4f5c-9e49-bd37f5f4ec2a)
 ### ER図
-![Image](https://github.com/user-attachments/assets/9689c56a-a890-46d8-a574-287e6aff59ab)
+![Image](https://github.com/user-attachments/assets/f60be698-3acf-404a-9ed4-3682af8d6d33)
 ​
 ## 開発環境
 - OS：Linux(CentOS)
