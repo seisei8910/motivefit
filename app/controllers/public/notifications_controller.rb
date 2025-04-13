@@ -1,5 +1,4 @@
 class Public::NotificationsController < ApplicationController
-
   def update
     notification = current_user.notifications.find(params[:id])
     notification.update(read: true)
@@ -17,5 +16,4 @@ class Public::NotificationsController < ApplicationController
       redirect_to user_path(notification.notifiable.user)
     end
   end
-
 end

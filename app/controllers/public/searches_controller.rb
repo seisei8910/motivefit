@@ -7,7 +7,7 @@ class Public::SearchesController < ApplicationController
     @method = params[:method]
 
     # 選択したモデルに応じて検索を実行
-    if @model  == "user"
+    if @model == "user"
       @users = User.search_for(@word, @method).page(params[:page])
       if @users.count > 0
         flash.now[:notice] = "新しい仲間との出会いがここに！どんなトレーニングをしているか見てみましょう💪"

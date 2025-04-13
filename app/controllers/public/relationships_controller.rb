@@ -56,5 +56,4 @@ class Public::RelationshipsController < ApplicationController
       end
     end
   end
-
 end
