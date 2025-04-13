@@ -50,21 +50,21 @@ class User < ApplicationRecord
     uniqueness: { case_insensitive: true }
 
   def self.search_for(word, method)
-    if method == 'perfect_match'
+    if method == "perfect_match"
       User.where(name: word)
-    elsif method == 'forward_match'
-      User.where('name LIKE ?', word + '%')
-    elsif method == 'backward_match'
-      User.where('name LIKE ?', '%' + word)
+    elsif method == "forward_match"
+      User.where("name LIKE ?", word + "%")
+    elsif method == "backward_match"
+      User.where("name LIKE ?", "%" + word)
     else
-      User.where('name LIKE ?', '%' + word + '%')
+      User.where("name LIKE ?", "%" + word + "%")
     end
   end
 
   def get_profile_image(width, height)
     unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/icon_no-image.png')
-      profile_image.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
+      file_path = Rails.root.join("app/assets/images/icon_no-image.png")
+      profile_image.attach(io: File.open(file_path), filename: "default-image.png", content_type: "image/png")
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end

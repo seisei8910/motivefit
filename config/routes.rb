@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :password], controllers: {
-    sessions: 'admin/sessions'
+    sessions: "admin/sessions"
   }
 
   namespace :admin do
-    get 'dashboards', to: 'dashboards#index'
+    get "dashboards", to: "dashboards#index"
     resources :users, only: [:show, :destroy]
   end
 
@@ -27,8 +27,8 @@ Rails.application.routes.draw do
         get :favorite_posts
       end
       resource :relationships, only: [:create, :destroy]
-        get "followings" => "relationships#followings", as: "followings"
-        get "followers" => "relationships#followers", as: "followers"
+      get "followings" => "relationships#followings", as: "followings"
+      get "followers" => "relationships#followers", as: "followers"
     end
     get "/search", to: "searches#search"
     resources :messages, only: [:create]

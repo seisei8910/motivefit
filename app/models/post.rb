@@ -16,14 +16,14 @@ class Post < ApplicationRecord
   end
 
   def self.search_for(word, method)
-    if method == 'perfect_match'
+    if method == "perfect_match"
       Post.where("menu or body ", word, word)
-    elsif method == 'forward_match'
-      Post.where('menu LIKE ? or body LIKE ?', word + '%', word + '%')
-    elsif method == 'backward_match'
-      Post.where('menu LIKE ? or body LIKE ?', '%' + word, '%' + word)
+    elsif method == "forward_match"
+      Post.where("menu LIKE ? or body LIKE ?", word + "%", word + "%")
+    elsif method == "backward_match"
+      Post.where("menu LIKE ? or body LIKE ?", "%" + word, "%" + word)
     else
-      Post.where('menu LIKE ? or body LIKE ?', '%' + word + '%', '%' + word + '%')
+      Post.where("menu LIKE ? or body LIKE ?", "%" + word + "%", "%" + word + "%")
     end
   end
 
@@ -35,5 +35,4 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-
 end
