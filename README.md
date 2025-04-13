@@ -2,6 +2,10 @@
 
 ## サイト概要
 
+### サービスのURL
+ゲストログイン機能を実装しましたので、Sign Upせずにお試しいただくこともできます。  
+https://motivefit.net/
+
 ### フィットネス仲間とつながるsns
 ​
 ### テーマを選んだ理由
@@ -21,7 +25,11 @@
 - トレーニングの目標、成果、感想をシェアしたい時
 ​
 ## 設計書
-- 後ほど作成予定
+
+### AWS構成図
+![Image](https://github.com/user-attachments/assets/12557b39-cbc0-4f5c-9e49-bd37f5f4ec2a)
+### ER図
+![Image](https://github.com/user-attachments/assets/9689c56a-a890-46d8-a574-287e6aff59ab)
 ​
 ## 開発環境
 - OS：Linux(CentOS)
