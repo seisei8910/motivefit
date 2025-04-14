@@ -38,8 +38,9 @@ https://motivefit.net/
 - 言語：HTML,CSS,JavaScript,Ruby 3.1.2,SQL
 - フレームワーク：Ruby on Rails 6.1.7.10
 - JSライブラリ：jQuery
+- CSSフレームワーク：Bootstrap 5.3
 - バージョン管理：Git（GitHub）
-- CI/CD：GitHub Actions
+- CI/CD：GitHub Actions RSpecおよびRubocopテスト後、自動デプロイ
 - テストツール：RSpec​
 - コード品質チェック：Rubocop​
 ​
