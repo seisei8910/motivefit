@@ -16,6 +16,10 @@ jobs:
         env:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
         options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
+      chrome:
+        image: seleniarm/standalone-chromium:latest
+        ports:
+          - 4445:4444
 
     steps:
       - name: Checkout code
@@ -25,6 +29,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
+
+      - name: Set up Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 120
+          install-dependencies: true
 
       - name: Cache node modules
         uses: actions/cache@v4
@@ -42,6 +52,17 @@ jobs:
       - name: Yarn install
         run: yarn install --check-files
 
+      - name: Check for port conflicts and set CAPYBARA_PORT
+        run: |
+          PORT=4444
+          if lsof -i:$PORT; then
+            echo "Port $PORT is in use, killing the process"
+            lsof -ti:$PORT | xargs kill -9
+          fi
+          CAPYBARA_PORT=3001
+          echo "CAPYBARA_PORT=$CAPYBARA_PORT" >> $GITHUB_ENV
+          echo "DEBUG: Capybara port set to $CAPYBARA_PORT"
+
       - name: Database create and migrate
         run: |
           cp config/database.yml.ci config/database.yml
@@ -50,6 +71,9 @@ jobs:
 
       - name: Run rspec
         run: bundle exec rspec
+        env:
+          SELENIUM_DRIVER_URL: http://localhost:4445/wd/hub
+          CAPYBARA_PORT: ${{ env.CAPYBARA_PORT }}
 
   rubocop:
     runs-on: ubuntu-latest
