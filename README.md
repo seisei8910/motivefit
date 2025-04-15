@@ -40,7 +40,7 @@ https://motivefit.net/
 - JSライブラリ：jQuery
 - CSSフレームワーク：Bootstrap 5.3
 - バージョン管理：Git（GitHub）
-- CI/CD：GitHub Actions RSpecおよびRubocopテスト後、自動デプロイ
+- CI/CD：GitHub Actions 自動デプロイ
 - テストツール：RSpec​
 - コード品質チェック：Rubocop​
 ​
