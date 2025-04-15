@@ -81,4 +81,4 @@ gem "simple_calendar"
 
 gem "aws-sdk-s3", require: false
 
-gem 'selenium-webdriver', '~> 4.10'
+gem "selenium-webdriver", "~> 4.10"

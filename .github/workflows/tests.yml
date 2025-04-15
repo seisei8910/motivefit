@@ -42,6 +42,10 @@ jobs:
       - name: Yarn install
         run: yarn install --check-files
 
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update && sudo apt-get install -y imagemagick
+
       - name: Database create and migrate
         run: |
           cp config/database.yml.ci config/database.yml
