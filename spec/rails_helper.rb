@@ -62,16 +62,3 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
 end
-
-Capybara.register_driver :selenium_chrome_headless do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument("--user-data-dir=#{Dir.mktmpdir}")
-  options.add_argument("--headless")
-  options.add_argument("--disable-gpu") # 古いバージョンのChrome用
-  options.add_argument("--no-sandbox") # CI環境での実行に必須
-  options.add_argument("--window-size=1920,1080")
-
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
-end
-
-Capybara.javascript_driver = :selenium_chrome_headless
